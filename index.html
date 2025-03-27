@@ -6,62 +6,7 @@
     <title>Prompt Assistant</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <style>
-        body {
-            position: relative; /* Required for scrollspy */
-            padding-top: 56px; /* Adjust based on navbar height */
-        }
-        .section {
-            padding: 60px 0;
-        }
-        #promptLibrary .card { /* Specificity might be needed if #library was used */
-            transition: opacity 0.3s ease-out;
-            height: 100%; /* Ensure cards in a row have same height */
-        }
-        .filter-button.active {
-            /* Active state for filter buttons - Bootstrap's default outline active is usually good */
-            font-weight: bold;
-        }
-         /* Optional: Add a subtle transition on hover/active */
-        .filter-button {
-            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, color 0.15s ease-in-out;
-        }
-        /* Style for hidden cards during filtering (if needed - pagination handles this now) */
-        .prompt-card.d-none {
-             display: none !important;
-        }
-        .copy-button {
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            z-index: 10; /* Ensure it's above card content if overlapping occurs */
-        }
-        .copy-button:hover {
-            color: var(--bs-primary);
-        }
-         /* Ensure footer is at the bottom */
-        html, body {
-            height: 100%;
-        }
-        body {
-             display: flex;
-             flex-direction: column;
-        }
-        main {
-            flex: 1 0 auto;
-        }
-        footer {
-            flex-shrink: 0;
-        }
-        /* Style for principles section cards */
-        #principles .card-header {
-            background-color: rgba(0,0,0,.03); /* Light header background */
-        }
-        #principles .card-body strong {
-            color: var(--bs-emphasis-color);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
 
@@ -100,10 +45,11 @@
         <section id="hero" class="section bg-light text-center">
             <div class="container">
                 <h1 class="display-4 mb-3"><i class="bi bi-stars text-primary"></i> Prompt Assistant</h1>
-                <p class="lead mb-4">Unlock AI's Potential: Learn, Explore & Craft Effective Prompts</p>
-                <p class="mb-4">AI is transforming the internet, and effective 'prompt engineering' is key. This tool helps you communicate clearly with AI to get the results you need.</p>
-                <a href="#library" class="btn btn-primary btn-lg me-2">Explore Prompts <i class="bi bi-arrow-down-circle"></i></a>
-                <a href="#principles" class="btn btn-secondary btn-lg">Learn Principles <i class="bi bi-book"></i></a>
+                <p class="lead mb-4">Master Your AI Conversations.</p>
+                <p class="mb-4 px-md-5">Get better, faster results from tools like ChatGPT, Gemini, and others. Effective prompting moves beyond simple questions to unlock AI's true potential. This assistant gives you practical techniques and ready-to-use examples to elevate your AI interactions, boost productivity, and design clearer solutions.</p>
+                <a href="#library" class="btn btn-primary btn-lg mb-2 me-lg-2">Explore Prompts <i class="bi bi-arrow-down-circle"></i></a>
+                <a href="#principles" class="btn btn-secondary btn-lg mb-2 me-lg-2">Learn Principles <i class="bi bi-book"></i></a>
+                <a href="#builder" class="btn btn-success btn-lg mb-2">Quick Prompt Starter <i class="bi bi-magic"></i></a>
             </div>
         </section>
 
@@ -111,7 +57,7 @@
             <div class="container">
                 <h2 class="text-center mb-5">The Power of a Good Prompt</h2>
                 <div class="row text-center g-4">
-                    <div class="col-md-4">
+                     <div class="col-md-4">
                         <div class="card h-100">
                             <div class="card-body">
                                 <i class="bi bi-bullseye fs-1 text-primary mb-3"></i>
@@ -170,136 +116,127 @@
         </section>
 
         <section id="principles" class="section bg-light">
-            <div class="container"> <h2 class="text-center mb-5">Crafting Better Prompts: Key Techniques</h2>
-
-                <div class="row g-4"> <div class="col-md-6 col-lg-4"> <div class="card h-100"> <div class="card-header"> <h5 class="mb-0 d-flex align-items-center"> <i class="bi bi-pencil-fill me-2"></i> Clarity & Specificity
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Be clear, concise, and as specific as possible. Avoid vague language.</p>
-                                <p class="card-text"><strong>Bad:</strong> "Tell me about dogs."<br>
-                                   <strong>Good:</strong> "Describe the typical temperament and exercise needs of a Labrador Retriever."</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-header">
-                                <h5 class="mb-0 d-flex align-items-center">
-                                    <i class="bi bi-journal-richtext me-2"></i> Context is King
-                                </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Provide relevant background details, examples, or constraints.</p>
-                                <p class="card-text"><strong>Example:</strong> "Summarize the following article about renewable energy for a non-technical audience: [Article Text]"</p>
+            <div class="container">
+                <h2 class="text-center mb-5">Crafting Better Prompts: Key Techniques</h2>
+                <div class="accordion" id="principlesAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingClarity">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClarity" aria-expanded="true" aria-controls="collapseClarity">
+                                <i class="bi bi-pencil-fill me-2"></i> Clarity & Specificity
+                            </button>
+                        </h2>
+                        <div id="collapseClarity" class="accordion-collapse collapse show" aria-labelledby="headingClarity" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Be clear, concise, and as specific as possible. Avoid vague language.
+                                <br><strong>Bad:</strong> "Tell me about dogs."
+                                <br><strong>Good:</strong> "Describe the typical temperament and exercise needs of a Labrador Retriever."
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-header">
-                                 <h5 class="mb-0 d-flex align-items-center">
-                                     <i class="bi bi-arrow-repeat me-2"></i> Iteration & Refinement
-                                 </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Prompting is often a process. Test different wordings and structures. See how the AI responds and adjust your prompt accordingly until you get the desired output.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                         <div class="card h-100">
-                            <div class="card-header">
-                                 <h5 class="mb-0 d-flex align-items-center">
-                                     <i class="bi bi-person-badge me-2"></i> Assign a Persona/Role
-                                 </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Instruct the AI to act as a specific type of person, expert, or even object.</p>
-                                 <p class="card-text"><strong>Example:</strong> "Act as an experienced travel agent. Suggest a 7-day itinerary for a family vacation in Costa Rica focused on nature and adventure."</p>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingContext">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseContext" aria-expanded="false" aria-controls="collapseContext">
+                                <i class="bi bi-journal-richtext me-2"></i> Context is King
+                            </button>
+                        </h2>
+                        <div id="collapseContext" class="accordion-collapse collapse" aria-labelledby="headingContext" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Provide relevant background details, examples, or constraints.
+                                <br><strong>Example:</strong> "Summarize the following article about renewable energy for a non-technical audience: [Article Text]"
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-4">
-                         <div class="card h-100">
-                            <div class="card-header">
-                                 <h5 class="mb-0 d-flex align-items-center">
-                                     <i class="bi bi-list-task me-2"></i> Define the Format
-                                 </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Clearly specify the desired output structure (list, table, paragraph, JSON, code block, etc.).</p>
-                                 <p class="card-text"><strong>Example:</strong> "Compare electric cars vs. gasoline cars based on cost, environmental impact, and performance. Present the information in a table format with clear columns."</p>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingIteration">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIteration" aria-expanded="false" aria-controls="collapseIteration">
+                                <i class="bi bi-arrow-repeat me-2"></i> Iteration & Refinement
+                            </button>
+                        </h2>
+                        <div id="collapseIteration" class="accordion-collapse collapse" aria-labelledby="headingIteration" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Prompting is often a process. Test different wordings and structures. See how the AI responds and adjust your prompt accordingly until you get the desired output.
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-lg-4">
-                         <div class="card h-100">
-                            <div class="card-header">
-                                 <h5 class="mb-0 d-flex align-items-center">
-                                     <i class="bi bi-arrows-angle-contract me-2"></i> Use Delimiters
-                                 </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Use characters like ```, ###, "", or &lt; &gt; to clearly separate different parts of your input, such as instructions, context text, or examples.</p>
-                                 <p class="card-text"><strong>Example:</strong> "Summarize the text below in three bullet points. ### Text to summarize: [Paste long text here] ###"</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-lg-4">
-                         <div class="card h-100">
-                            <div class="card-header">
-                                 <h5 class="mb-0 d-flex align-items-center">
-                                     <i class="bi bi-card-list me-2"></i> Provide Examples (Few-Shot)
-                                 </h5>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Include one or more examples of the input/output format you want the AI to follow. This is especially useful for complex or nuanced tasks.</p>
-                                 <p class="card-text"><strong>Example:</strong> "Convert the following sentences to a more formal tone. Example 1: Input: 'Hey, what's up?' Output: 'Greetings, how are you today?' Example 2: Input: '[Your sentence here]' Output:"</p>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingPersona">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePersona" aria-expanded="false" aria-controls="collapsePersona">
+                                <i class="bi bi-person-badge me-2"></i> Assign a Persona/Role
+                            </button>
+                        </h2>
+                        <div id="collapsePersona" class="accordion-collapse collapse" aria-labelledby="headingPersona" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Instruct the AI to act as a specific type of person, expert, or even object.
+                                <br><strong>Example:</strong> "Act as an experienced travel agent. Suggest a 7-day itinerary for a family vacation in Costa Rica focused on nature and adventure."
                             </div>
                         </div>
                     </div>
-
-                </div> </div> </section>
-
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFormat">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFormat" aria-expanded="false" aria-controls="collapseFormat">
+                                <i class="bi bi-list-task me-2"></i> Define the Format
+                            </button>
+                        </h2>
+                        <div id="collapseFormat" class="accordion-collapse collapse" aria-labelledby="headingFormat" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Clearly specify the desired output structure (list, table, paragraph, JSON, code block, etc.).
+                                <br><strong>Example:</strong> "Compare electric cars vs. gasoline cars based on cost, environmental impact, and performance. Present the information in a table format with clear columns."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingDelimiters">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDelimiters" aria-expanded="false" aria-controls="collapseDelimiters">
+                                <i class="bi bi-arrows-angle-contract me-2"></i> Use Delimiters
+                            </button>
+                        </h2>
+                        <div id="collapseDelimiters" class="accordion-collapse collapse" aria-labelledby="headingDelimiters" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Use characters like ```, ###, "", or < > to clearly separate different parts of your input, such as instructions, context text, or examples.
+                                <br><strong>Example:</strong> "Summarize the text below in three bullet points. ### Text to summarize: [Paste long text here] ###"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingExamples">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExamples" aria-expanded="false" aria-controls="collapseExamples">
+                                <i class="bi bi-card-list me-2"></i> Provide Examples (Few-Shot)
+                            </button>
+                        </h2>
+                        <div id="collapseExamples" class="accordion-collapse collapse" aria-labelledby="headingExamples" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Include one or more examples of the input/output format you want the AI to follow. This is especially useful for complex or nuanced tasks.
+                                <br><strong>Example:</strong> "Convert the following sentences to a more formal tone. Example 1: Input: 'Hey, what's up?' Output: 'Greetings, how are you today?' Example 2: Input: '[Your sentence here]' Output:"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <section id="library" class="section">
-            <div class="container">
+             <div class="container">
                 <h2 class="text-center mb-4">Explore Useful AI Prompts</h2>
-
                 <div class="row mb-4 align-items-center">
                     <div class="col-lg-8 mb-3 mb-lg-0">
-                        <div id="category-filters" class="d-flex flex-wrap" role="group" aria-label="Category Filters">
-                            <button type="button" class="btn btn-outline-primary filter-button active m-1" data-filter="all">All</button>
-                        </div>
+                        <div id="category-filters" class="btn-group flex-wrap" role="group" aria-label="Category Filters">
+                            <button type="button" class="btn btn-outline-primary filter-button active" data-filter="all">All</button>
+                            </div>
                     </div>
                     <div class="col-lg-4">
                         <input type="search" id="search-input" class="form-control" placeholder="Search prompts...">
                     </div>
                 </div>
-
                 <div id="prompt-grid" class="row g-4">
                     <div class="col-12 text-center d-none" id="no-results">
                         <p class="lead text-muted">No prompts found matching your criteria.</p>
                     </div>
-                    </div>
-
-                <nav aria-label="Prompt pagination" class="mt-5 d-flex justify-content-center">
-                    <ul class="pagination" id="pagination-controls">
-                        </ul>
-                </nav>
-
+                </div>
             </div>
         </section>
 
         <section id="builder" class="section bg-light">
-            <div class="container">
+             <div class="container">
                 <h2 class="text-center mb-5">Quick Prompt Starter</h2>
                 <div class="row justify-content-center">
                     <div class="col-lg-8">
@@ -316,8 +253,8 @@
                                             <option value="Write code for">Write code for</option>
                                             <option value="Create a list of">Create a list of</option>
                                             <option value="Draft an email about">Draft an email about</option>
-                                            <option value="Translate to Spanish:">Translate to Spanish</option>
-                                            </select>
+                                             <option value="Translate to Spanish:">Translate to Spanish</option>
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="builder-topic" class="form-label">Topic / Subject</label>
@@ -333,7 +270,7 @@
                                                 <option value="expert">Expert</option>
                                                 <option value="enthusiastic">Enthusiastic</option>
                                                 <option value="simple">Simple</option>
-                                                </select>
+                                            </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="builder-format" class="form-label">Desired Format</label>
@@ -344,7 +281,7 @@
                                                 <option value="a table">Table</option>
                                                 <option value="JSON">JSON</option>
                                                 <option value="a code block">Code block</option>
-                                                </select>
+                                            </select>
                                         </div>
                                     </div>
                                      <div class="mb-3">
@@ -369,275 +306,30 @@
 
         <section id="learn-more" class="section">
             <div class="container text-center">
-                <h2>Dive Deeper</h2>
-                <p class="lead">AI and prompt engineering are rapidly evolving fields.</p>
-                <p>Continue exploring, experimenting, and refining your skills to harness the full potential of these transformative technologies. Remember that the best prompt often depends on the specific AI model and your unique goals.</p>
+                <h2>Keep Sharpening Your Edge</h2>
+                <p class="lead">The AI landscape changes fast, and so does the art of communicating with it.</p>
+                <p>Use these principles and examples as your foundation, but don't stop experimenting, learning, and adapting. Refining your prompting skills is key to staying ahead, driving innovation, and truly mastering this powerful technology. What new techniques will you discover and share?</p>
                 </div>
         </section>
     </main>
 
     <footer class="bg-dark text-white text-center py-3 mt-auto">
-        <div class="container">
-            <p class="mb-0">&copy; <span id="current-year"></span> Prompt Assistant. Inspired by the evolving synergy of AI and the Internet.</p>
+        <div class="container d-flex justify-content-center align-items-center">
+            <span class="me-3">&copy; <span id="current-year"></span> Prompt Assistant. A project by stancsz.</span>
+            <a id="linkedin-share-btn" href="#" target="_blank" rel="noopener noreferrer" class="social-share-btn text-white" title="Share on LinkedIn">
+                <i class="bi bi-linkedin fs-5"></i>
+            </a>
         </div>
     </footer>
 
     <script src="[https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js](https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js)" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+    <script src="prompts.js"></script>
+
     <script>
-        // --- Data ---
-        // *** The large 'prompts' array is intentionally excluded here as requested. ***
-        // *** Make sure you define it in your actual implementation, like below: ***
-        const prompts = [
-    // --- Marketing & Sales ---
-    { category: "Marketing", use_case: "Product Description", prompt: "Craft an engaging product description for an eco-friendly water bottle highlighting its durability, insulation, and sleek design. Target audience: environmentally conscious millennials. Tone: Enthusiastic and informative.", id: "p1" },
-    { category: "Marketing", use_case: "Catchy Tagline", prompt: "Develop 5 catchy taglines for a new line of sustainable athletic wear made from recycled materials. Focus on performance and eco-friendliness.", id: "p2" },
-    { category: "Marketing", use_case: "Social Media Captions (Instagram)", prompt: "Generate three Instagram caption ideas for a new organic juice launch. Include relevant hashtags and a call to action (e.g., visit website, find in stores).", id: "p3" },
-    { category: "Content Creation", use_case: "Blog Post Outline", prompt: "Create a detailed blog post outline on the topic 'The Future of Remote Work'. Include sections on technology, culture, challenges, and predictions. Target audience: HR professionals.", id: "p4" },
-    { category: "Marketing", use_case: "Email Subject Line (Sale)", prompt: "Write 5 compelling email subject lines to announce a 20% off summer sale for a cosmetics brand.", id: "p5" },
-    { category: "Marketing", use_case: "Homepage Headlines (SaaS)", prompt: "Brainstorm five compelling headlines for a SaaS company's homepage that conveys reliability, innovation, and ease of use.", id: "p6" },
-    { category: "Marketing", use_case: "Value Proposition", prompt: "Refine the value proposition for a project management tool targeting small agencies. Focus on collaboration, client reporting, and affordability.", id: "p25" },
-    { category: "Marketing", use_case: "Target Audience Persona", prompt: "Create a detailed buyer persona for a luxury travel planning service. Include demographics, psychographics, pain points, and preferred communication channels.", id: "p26" },
-    { category: "Marketing", use_case: "SEO Keyword Ideas", prompt: "Generate a list of long-tail keywords related to 'vegan baking recipes for beginners'. Group them by search intent (informational, transactional).", id: "p27" },
-    { category: "Marketing", use_case: "A/B Test Variations (Headline)", prompt: "Suggest 3 alternative headlines for a landing page promoting a free webinar on digital marketing trends. The original headline is 'Learn the Latest Digital Marketing Trends'.", id: "p28" },
-    { category: "Marketing", use_case: "Competitor Analysis Questions", prompt: "List key questions to ask when analyzing a competitor's social media strategy.", id: "p29" },
-    { category: "Marketing", use_case: "Google Ads Copy", prompt: "Write 3 Google Ads headlines and 2 descriptions for a campaign targeting users searching for 'online therapy services'. Highlight confidentiality and licensed therapists.", id: "p30" },
-    { category: "Marketing", use_case: "Facebook Ad Copy", prompt: "Draft Facebook ad copy for a new fitness app targeting busy professionals. Focus on short, effective workouts and progress tracking. Include a clear call-to-action.", id: "p31" },
-    { category: "Marketing", use_case: "Press Release Outline", prompt: "Outline a press release announcing the launch of a new sustainable packaging solution for e-commerce businesses.", id: "p32" },
-    { category: "Marketing", use_case: "Influencer Outreach Message", prompt: "Draft a personalized outreach message template for contacting micro-influencers in the sustainable fashion niche about a potential collaboration.", id: "p33" },
-    { category: "Marketing", use_case: "Brand Voice Definition", prompt: "Describe the key characteristics of a brand voice that is 'playful, informative, and slightly irreverent' for a craft beer company.", id: "p34" },
-    { category: "Sales", use_case: "Cold Email Template", prompt: "Write a cold email template for a B2B SaaS company selling CRM software to sales managers. Focus on solving a specific pain point (e.g., inaccurate forecasting).", id: "p35" },
-    { category: "Sales", use_case: "Follow-Up Email", prompt: "Draft a polite follow-up email to send 3 days after a product demo if the prospect hasn't responded.", id: "p36" },
-    { category: "Sales", use_case: "Objection Handling", prompt: "Provide potential responses to the sales objection 'Your price is too high' for a premium software product.", id: "p37" },
-    { category: "Marketing", use_case: "Case Study Questions", prompt: "List interview questions to ask a satisfied customer for a case study about how your software improved their team's productivity.", id: "p38" },
-    { category: "Marketing", use_case: "Market Research Survey", prompt: "Draft 5 survey questions to gauge customer interest in a potential new feature for a mobile banking app.", id: "p39" },
-    { category: "Marketing", use_case: "Social Media Calendar Ideas", prompt: "Suggest 10 social media post ideas for a local bookstore for the month of October, including themes like Halloween, author birthdays, and reading challenges.", id: "p40" },
-    { category: "Marketing", use_case: "Video Ad Script Hook", prompt: "Write 3 different opening hooks (first 5 seconds) for a video ad promoting a language learning app.", id: "p41" },
-    { category: "Marketing", use_case: "Podcast Ad Script", prompt: "Write a 30-second podcast ad script for a meal delivery service, emphasizing convenience and healthy options.", id: "p42" },
+        // Data: 'prompts' is loaded from prompts.js
 
-    // --- Content Creation ---
-    { category: "Content Creation", use_case: "Blog Post Intro", prompt: "Write an engaging introduction for a blog post titled '10 Simple Ways to Reduce Your Carbon Footprint at Home'.", id: "p43" },
-    { category: "Content Creation", use_case: "Blog Post Conclusion", prompt: "Write a concluding paragraph for a blog post comparing React and Vue.js, summarizing the key points and offering a final thought.", id: "p44" },
-    { category: "Content Creation", use_case: "Listicle Ideas", prompt: "Generate 5 listicle ideas related to 'budget travel in Southeast Asia'.", id: "p45" },
-    { category: "Content Creation", use_case: "How-To Article Steps", prompt: "Outline the steps for a how-to article on 'Brewing the Perfect Pour-Over Coffee'.", id: "p46" },
-    { category: "Content Creation", use_case: "Product Review Structure", prompt: "Suggest a structure for a balanced review of a new smartphone, covering design, performance, camera, battery life, and value.", id: "p47" },
-    { category: "Content Creation", use_case: "Video Script Outline", prompt: "Create an outline for a 5-minute explainer video about blockchain technology for a general audience.", id: "p48" },
-    { category: "Content Creation", use_case: "Podcast Episode Questions", prompt: "Generate interview questions for a podcast episode featuring an expert on sustainable agriculture.", id: "p49" },
-    { category: "Content Creation", use_case: "Infographic Content Points", prompt: "List 5 key data points or facts that could be included in an infographic about the benefits of meditation.", id: "p50" },
-    { category: "Content Creation", use_case: "Presentation Outline", prompt: "Outline a 10-slide presentation for a project kickoff meeting, including sections for project goals, scope, timeline, team roles, and next steps.", id: "p51" },
-    { category: "Content Creation", use_case: "Newsletter Segment Ideas", prompt: "Suggest 3 recurring segment ideas for a weekly newsletter aimed at freelance writers (e.g., job board roundup, writing tips, industry news).", id: "p52" },
-    { category: "Content Creation", use_case: "Case Study Narrative", prompt: "Write a short narrative paragraph describing the 'Challenge' section of a case study about a company struggling with outdated inventory management.", id: "p53" },
-    { category: "Content Creation", use_case: "Whitepaper Introduction", prompt: "Draft an introduction for a whitepaper discussing the impact of AI on the customer service industry.", id: "p54" },
-    { category: "Content Creation", use_case: "Rewrite for Different Audience", prompt: "Rewrite the following technical paragraph about API rate limiting for a non-technical marketing audience: '[Paste technical paragraph here]'.", id: "p55" },
-    { category: "Content Creation", use_case: "Repurpose Blog Post for Social", prompt: "Suggest 3 ways to repurpose a long-form blog post about 'Healthy Eating Habits' into engaging social media content (e.g., Instagram carousel, Twitter thread, short video script).", id: "p56" },
-    { category: "Content Creation", use_case: "FAQ Page Questions", prompt: "Generate 10 frequently asked questions (FAQs) for a new e-commerce website selling handmade jewelry.", id: "p57" },
-    { category: "Content Creation", use_case: "About Us Page Draft", prompt: "Draft a short 'About Us' section for a small, family-owned bakery, emphasizing tradition and quality ingredients.", id: "p58" },
-    { category: "Content Creation", use_case: "Call to Action Variations", prompt: "Provide 5 different call-to-action phrases for a button that encourages users to download a free ebook.", id: "p59" },
-    { category: "Content Creation", use_case: "Meta Description", prompt: "Write a compelling meta description (under 160 characters) for a blog post titled 'The Ultimate Guide to Starting a Podcast'.", id: "p60" },
-    { category: "Content Creation", use_case: "Testimonial Request Email", prompt: "Draft an email asking a happy client if they would be willing to provide a short testimonial about their positive experience.", id: "p61" },
-
-    // --- Software Development & Technical ---
-    { category: "Development", use_case: "Generate Python Function", prompt: "Generate a Python function `sort_list(data)` that takes a list of integers `data` and returns a new list sorted in ascending order. Include error handling for non-integer inputs.", id: "p7" },
-    { category: "Development", use_case: "Debug Javascript", prompt: "Debug the following JavaScript snippet intended to handle form submissions via fetch API. It's currently not sending the data correctly: ```javascript\n// [Paste problematic code snippet here]\n``` Explain the issue and provide the corrected code.", id: "p8" },
-    { category: "Technical", use_case: "Explain Concept Simply (OOP)", prompt: "Explain the concept of object-oriented programming (OOP) using simple terms and a real-world analogy suitable for a beginner with no prior programming experience.", id: "p9" },
-    { category: "Technical", use_case: "Write Documentation (Node.js)", prompt: "Write brief setup documentation for a basic Node.js project using Express. Include steps for initialization, installing Express, and creating a simple 'Hello World' server.", id: "p10" },
-    { category: "Development", use_case: "HTML/CSS Layout", prompt: "Provide sample HTML and CSS code for a minimalist landing page layout featuring a hero section with a headline and button, followed by three feature boxes arranged horizontally.", id: "p11" },
-    { category: "Development", use_case: "Code Explanation", prompt: "Explain what the following Python code does, line by line: ```python\n[Paste Python code snippet here]\n```", id: "p62" },
-    { category: "Development", use_case: "API Endpoint Design", prompt: "Design a REST API endpoint structure (URL, HTTP method, request body, success response, error response) for creating a new user profile.", id: "p63" },
-    { category: "Development", use_case: "Database Schema Design", prompt: "Suggest a simple SQL database schema (table names, columns, data types, basic relationships) for a blog application with users, posts, and comments.", id: "p64" },
-    { category: "Development", use_case: "Generate Unit Tests (Python)", prompt: "Write pytest unit tests for the following Python function: ```python\ndef add(a, b):\n return a + b\n``` Include tests for positive numbers, negative numbers, and zero.", id: "p65" },
-    { category: "Development", use_case: "Refactor Code Suggestion", prompt: "Suggest ways to refactor the following JavaScript code for better readability and efficiency: ```javascript\n[Paste poorly written JavaScript snippet here]\n```", id: "p66" },
-    { category: "Development", use_case: "Translate Code (Python to JS)", prompt: "Translate the following simple Python function into equivalent JavaScript: ```python\ndef greet(name):\n print(f'Hello, {name}!')\n```", id: "p67" },
-    { category: "Development", use_case: "Generate Boilerplate Code (React)", prompt: "Generate boilerplate code for a simple React functional component named 'UserProfile' that accepts 'name' and 'email' as props.", id: "p68" },
-    { category: "Development", use_case: "Write Regex", prompt: "Write a regular expression to validate an email address according to common standards.", id: "p69" },
-    { category: "Technical", use_case: "Explain Error Message", prompt: "Explain the common causes and potential solutions for a '404 Not Found' HTTP error.", id: "p70" },
-    { category: "Technical", use_case: "Compare Technologies", prompt: "Compare and contrast SQL and NoSQL databases, highlighting key differences in structure, scalability, and use cases. Present the comparison in a table format.", id: "p71" },
-    { category: "Technical", use_case: "Explain Algorithm", prompt: "Explain the Binary Search algorithm, how it works, and its time complexity. Use a simple example.", id: "p72" },
-    { category: "Development", use_case: "Generate SQL Query", prompt: "Write an SQL query to select all users from the 'users' table whose email address ends with '@example.com' and who registered after '2023-01-01'.", id: "p73" },
-    { category: "Technical", use_case: "System Design Concepts", prompt: "Describe the concept of load balancing in system design and list two common load balancing strategies.", id: "p74" },
-    { category: "Technical", use_case: "Troubleshooting Steps", prompt: "Provide a list of basic troubleshooting steps for diagnosing a slow internet connection.", id: "p75" },
-    { category: "Technical", use_case: "Security Concepts", prompt: "Explain the difference between Symmetric and Asymmetric encryption.", id: "p76" },
-    { category: "Development", use_case: "Write Git Commit Message", prompt: "Suggest a clear and concise Git commit message for a change that refactored the user authentication logic.", id: "p77" },
-    { category: "Development", use_case: "Choose Library/Framework", prompt: "Recommend a suitable Python library for creating interactive data visualizations for a web application and briefly explain why.", id: "p78" },
-    { category: "Technical", use_case: "Cloud Computing Concepts", prompt: "Explain the difference between IaaS, PaaS, and SaaS in cloud computing.", id: "p79" },
-    { category: "Development", use_case: "Docker Concepts", prompt: "Explain the purpose of a Dockerfile and list 3 common instructions used in one.", id: "p80" },
-    { category: "Development", use_case: "Code Review Checklist", prompt: "Generate a short checklist of key things to look for when performing a code review (e.g., correctness, style, security, performance).", id: "p81" },
-    { category: "Technical", use_case: "Generate Sample Data (JSON)", prompt: "Generate a sample JSON object representing a product with fields like id, name, price, description, and categories (an array of strings).", id: "p82" },
-
-    // --- Education & Learning ---
-    { category: "Education", use_case: "Generate Quiz (History)", prompt: "Generate a 10-question multiple-choice quiz about the main causes of World War I. Include an answer key.", id: "p12" }, // Modified original
-    { category: "Learning", use_case: "Summarize Article", prompt: "Summarize the main arguments, methodology, and conclusions of the following scholarly article on climate change adaptation: [Paste article abstract or key paragraphs here]. Keep the summary under 200 words.", id: "p13" },
-    { category: "Education", use_case: "Create Lesson Plan Idea (Math)", prompt: "Suggest a fun and engaging activity for a 3rd-grade class to practice multiplication tables (focus on 7s and 8s).", id: "p14" },
-    { category: "Learning", use_case: "Explain Complex Topic (Science)", prompt: "Explain the concept of quantum computing in simple, non-technical terms suitable for a curious high school student.", id: "p15" },
-    { category: "Education", use_case: "Study Guide Creation", prompt: "Create a study guide outline for a chapter on 'Cellular Respiration' in a high school biology textbook. Include key terms, concepts, and potential essay questions.", id: "p83" },
-    { category: "Education", use_case: "Generate Practice Problems (Math)", prompt: "Generate 5 practice problems involving solving linear equations with variables on both sides.", id: "p84" },
-    { category: "Learning", use_case: "Explain Historical Event", prompt: "Explain the significance of the Gutenberg printing press in European history.", id: "p85" },
-    { category: "Education", use_case: "Flashcard Content Generation", prompt: "Generate content for 10 flashcards (term on one side, definition on the other) for key vocabulary related to the US Civil War.", id: "p86" },
-    { category: "Education", use_case: "Essay Prompts", prompt: "Draft 3 different essay prompts for a literature class discussing the theme of 'identity' in the novel 'To Kill a Mockingbird'.", id: "p87" },
-    { category: "Learning", use_case: "Explain Scientific Concept (Biology)", prompt: "Explain the process of photosynthesis in a way that a 5th grader could understand.", id: "p88" },
-    { category: "Education", use_case: "Lesson Plan Activity (Art)", prompt: "Suggest a classroom activity for elementary students to learn about primary and secondary colors through mixing paint.", id: "p89" },
-    { category: "Learning", use_case: "Summarize Video Content", prompt: "Summarize the key points of the following educational video about the water cycle: [Provide link or transcript snippet].", id: "p90" },
-    { category: "Learning", use_case: "Identify Key Takeaways", prompt: "Identify the 3 main takeaways from this text about effective communication: [Paste text snippet here].", id: "p91" },
-    { category: "Learning", use_case: "Generate Discussion Questions", prompt: "Generate 5 discussion questions based on the provided article about the ethics of artificial intelligence: [Paste article snippet here].", id: "p92" },
-    { category: "Learning", use_case: "Find Related Concepts", prompt: "What are some concepts related to 'supply and demand' in economics?", id: "p93" },
-    { category: "Learning", use_case: "Create Analogy", prompt: "Create an analogy to explain how a computer's RAM works.", id: "p94" },
-    { category: "Learning", use_case: "Translate Text (Spanish)", prompt: "Translate the following English sentence into natural-sounding Spanish: 'I would like to book a hotel room for two nights.'", id: "p95" },
-    { category: "Learning", use_case: "Simplify Jargon", prompt: "Explain the term 'cognitive dissonance' in simple language.", id: "p96" },
-    { category: "Education", use_case: "Debate Topics", prompt: "Suggest 3 suitable topics for a high school debate club focusing on current environmental issues.", id: "p97" },
-    { category: "Learning", use_case: "Fact-Checking Assistance", prompt: "Provide sources or arguments to help verify or refute the claim that 'Humans only use 10% of their brains.'", id: "p98" },
-    { category: "Education", use_case: "Generate Rubric", prompt: "Create a simple grading rubric (criteria and scoring levels) for a short persuasive essay.", id: "p99" },
-    { category: "Learning", use_case: "Concept Mapping Ideas", prompt: "Suggest key concepts and relationships to include in a concept map about the 'French Revolution'.", id: "p100" },
-    { category: "Education", use_case: "Role-Playing Scenario (History)", prompt: "Create a brief role-playing scenario for students to understand the differing perspectives of Federalists and Anti-Federalists during the ratification of the US Constitution.", id: "p101" },
-    { category: "Learning", use_case: "Language Practice Drill", prompt: "Generate 5 simple fill-in-the-blank sentences in French to practice conjugation of the verb 'être' (to be) in the present tense.", id: "p102" },
-
-    // --- Personal Productivity & Organization ---
-    { category: "Productivity", use_case: "To-Do List (Party Planning)", prompt: "Create a detailed to-do list for planning a surprise birthday party for a friend. Include tasks for invitations, venue, food, decorations, and entertainment.", id: "p16" },
-    { category: "Productivity", use_case: "Meal Plan (Vegetarian)", prompt: "Generate a 7-day weekly meal plan for a vegetarian diet aiming for approximately 1800 calories per day. Include breakfast, lunch, dinner, and snacks.", id: "p17" },
-    { category: "Productivity", use_case: "Fitness Routine (Intermediate)", prompt: "Outline a 4-day per week fitness routine focusing on cardio (30 min) and core strengthening exercises (15 min) suitable for an intermediate fitness level.", id: "p18" },
-    { category: "Organization", use_case: "Summarize Meeting Minutes", prompt: "Summarize the key decisions, action items (with owners and deadlines if available), and main topics discussed from the following meeting minutes: [Paste meeting minutes here]", id: "p19" },
-    { category: "Productivity", use_case: "Time Blocking Schedule", prompt: "Create a sample time blocking schedule for a freelance graphic designer for a typical Tuesday, including blocks for client work, prospecting, admin, and breaks.", id: "p103" },
-    { category: "Productivity", use_case: "Meeting Agenda Generation", prompt: "Generate a meeting agenda for a 1-hour weekly team sync. Include sections for project updates, roadblocks, and action items.", id: "p104" },
-    { category: "Productivity", use_case: "Email Drafting (Request)", prompt: "Draft a polite email requesting feedback on a document from a colleague, specifying the desired timeline.", id: "p105" },
-    { category: "Productivity", use_case: "Prioritize Tasks (Eisenhower Matrix)", prompt: "Help me prioritize the following tasks using the Eisenhower Matrix (Urgent/Important): 1. Finish client report (due tomorrow) 2. Plan next week's social media posts 3. Respond to non-urgent emails 4. Research new industry trends 5. Fix critical bug on website.", id: "p106" },
-    { category: "Productivity", use_case: "Goal Setting Breakdown", prompt: "Break down the goal 'Learn conversational Spanish in 6 months' into smaller, actionable monthly steps.", id: "p107" },
-    { category: "Productivity", use_case: "Meeting Prep Questions", prompt: "Generate questions to ask yourself before attending a project planning meeting to ensure you are prepared.", id: "p108" },
-    { category: "Organization", use_case: "Note-Taking Summary", prompt: "Summarize the key points from the following lecture notes about photosynthesis: [Paste notes here]", id: "p109" },
-    { category: "Organization", use_case: "File Naming Conventions", prompt: "Suggest a clear and consistent file naming convention for project documents that includes date, project name, document type, and version number.", id: "p110" },
-    { category: "Organization", use_case: "Folder Structure Ideas", prompt: "Recommend a logical folder structure for organizing digital photos on a computer.", id: "p111" },
-    { category: "Organization", use_case: "Digital Decluttering Steps", prompt: "Outline steps for decluttering and organizing your email inbox.", id: "p112" },
-    { category: "Organization", use_case: "Inventory List Generation", prompt: "Create a template for an inventory list for home office equipment, including columns for item name, serial number, purchase date, and warranty info.", id: "p113" },
-    { category: "Organization", use_case: "Packing List (Trip)", prompt: "Generate a packing list for a 3-day business trip to a city with a moderate climate.", id: "p114" },
-    { category: "Organization", use_case: "Organize Research Notes", prompt: "Suggest a method or tool for organizing research notes and sources for writing a thesis paper.", id: "p115" },
-    { category: "Productivity", use_case: "Habit Tracker Ideas", prompt: "Suggest 5 daily habits to include in a habit tracker for improving overall well-being.", id: "p116" },
-    { category: "Productivity", use_case: "Pomodoro Technique Explanation", prompt: "Explain the Pomodoro Technique for time management and how to implement it.", id: "p117" },
-    { category: "Organization", use_case: "Grocery List by Aisle", prompt: "Organize the following grocery items roughly by common supermarket aisle categories (produce, dairy, pantry, frozen, etc.): Milk, bread, apples, chicken breast, pasta, canned tomatoes, yogurt, eggs, lettuce, ice cream.", id: "p118" },
-    { category: "Productivity", use_case: "Email Filtering Rules Ideas", prompt: "Suggest rules for filtering emails in an inbox to reduce clutter (e.g., filtering newsletters, notifications).", id: "p119" },
-    { category: "Productivity", use_case: "Drafting Polite Decline", prompt: "Draft a polite email declining an invitation to a non-essential meeting due to a prior commitment.", id: "p120" },
-    { category: "Organization", use_case: "Recipe Organization", prompt: "Suggest ways to organize a collection of digital recipes (e.g., by cuisine, meal type, main ingredient).", id: "p121" },
-
-    // --- Creative Writing & Art ---
-    { category: "Creative", use_case: "Short Story Idea", prompt: "Write the opening paragraph for a short story about a lonely robot living in a futuristic city who discovers a hidden garden.", id: "p20" },
-    { category: "Creative", use_case: "Poem Generation (Nostalgia)", prompt: "Generate a short, four-stanza poem exploring the theme of 'nostalgia' and 'childhood memories'. Use a melancholic but hopeful tone.", id: "p21" },
-    { category: "Creative", use_case: "Character Sketch (Fantasy)", prompt: "Create a character sketch for a fantasy novel hero. Include their name, physical appearance, main personality traits, unique ability, and a core motivation.", id: "p22" },
-    { category: "Art", use_case: "Image Generation Prompt (Cyberpunk)", prompt: "Describe a scene for an AI image generator: 'A vibrant, bustling marketplace in a cyberpunk city at night, rain slicked streets reflecting neon signs, diverse characters haggling over goods, flying vehicles overhead. Style: detailed, cinematic, atmospheric.'", id: "p23" },
-    { category: "Creative", use_case: "Dialogue Writing", prompt: "Write a short dialogue between two characters, a skeptical detective and an overly enthusiastic inventor, discussing a new, slightly unbelievable gadget.", id: "p24" },
-    { category: "Creative", use_case: "World-Building (Magic System)", prompt: "Describe the basic rules and limitations of a magic system based on elemental manipulation (earth, air, fire, water) for a fantasy setting.", id: "p122" },
-    { category: "Creative", use_case: "Plot Point Generation", prompt: "Generate three potential plot twists for a mystery novel where the main suspect appears to have an airtight alibi.", id: "p123" },
-    { category: "Creative", use_case: "Character Backstory Idea", prompt: "Suggest a compelling backstory element for a sci-fi spaceship captain who is secretly running from their past.", id: "p124" },
-    { category: "Creative", use_case: "Genre Mashup Idea", prompt: "Suggest a story concept that combines elements of Western and Horror genres.", id: "p125" },
-    { category: "Creative", use_case: "Poetry Form (Haiku)", prompt: "Write a haiku (5-7-5 syllables) about the changing seasons.", id: "p126" },
-    { category: "Creative", use_case: "Scriptwriting (Scene Description)", prompt: "Write a short scene description for a screenplay: INT. COFFEE SHOP - DAY. Rain streaks down the window. ANNA (30s) stares blankly at her laptop, a half-empty mug beside her.", id: "p127" },
-    { category: "Creative", use_case: "Generate Writing Prompts (Fantasy)", prompt: "Generate 5 writing prompts for short fantasy stories.", id: "p128" },
-    { category: "Art", use_case: "Image Prompt Variation (Style)", prompt: "Adapt the following image prompt to generate variations in different art styles (e.g., Impressionist, Art Nouveau, Pixel Art): 'A lone lighthouse on a cliff overlooking a stormy sea'.", id: "p129" },
-    { category: "Art", use_case: "Analyze Artwork Description", prompt: "Describe the mood and potential symbolism in a painting depicting a single, leafless tree in a vast, snowy landscape.", id: "p130" },
-    { category: "Art", use_case: "Generate Color Palette", prompt: "Generate a color palette (list hex codes or color names) inspired by a 'sunset over the desert'.", id: "p131" },
-    { category: "Art", use_case: "Suggest Composition Ideas", prompt: "Suggest 3 different composition ideas (e.g., rule of thirds, leading lines, symmetry) for photographing a cityscape.", id: "p132" },
-    { category: "Art", use_case: "Describe Textures", prompt: "Describe the textures you might find in a detailed painting of an ancient stone ruin (e.g., rough stone, smooth moss, cracked plaster).", id: "p133" },
-    { category: "Creative", use_case: "Logline Generation", prompt: "Write a logline (a one-sentence summary) for a movie about a group of kids who discover a time machine in their treehouse.", id: "p134" },
-    { category: "Creative", use_case: "Metaphor Generation", prompt: "Generate three metaphors to describe the feeling of 'anxiety'.", id: "p135" },
-    { category: "Creative", use_case: "Flash Fiction Prompt", prompt: "Write a piece of flash fiction (under 300 words) based on the prompt: 'The last message he received was just a single coordinate.'", id: "p136" },
-    { category: "Art", use_case: "Image Prompt (Character Design)", prompt: "Generate a detailed description for an AI image generator of a 'wise old elven archivist, surrounded by glowing scrolls and ancient books, in a library carved into a giant tree. Style: detailed fantasy illustration, warm lighting.'", id: "p137" },
-    { category: "Creative", use_case: "Opening Line Ideas", prompt: "Generate 5 different opening lines for a horror story.", id: "p138" },
-    { category: "Creative", use_case: "Song Lyric Ideas", prompt: "Brainstorm lyrical themes or phrases for a song about overcoming adversity.", id: "p139" },
-    { category: "Art", use_case: "Describe Lighting", prompt: "Describe the lighting in a photograph taken during the 'golden hour'.", id: "p140" },
-
-    // --- Business & Finance ---
-    { category: "Business", use_case: "SWOT Analysis", prompt: "Conduct a basic SWOT analysis (Strengths, Weaknesses, Opportunities, Threats) for a small independent coffee shop.", id: "p141" },
-    { category: "Business", use_case: "Business Plan Section (Marketing)", prompt: "Outline the key components of the Marketing and Sales Strategy section of a business plan for a new mobile app.", id: "p142" },
-    { category: "Business", use_case: "Market Entry Strategy Ideas", prompt: "Suggest three potential market entry strategies for a software company looking to expand into the European market.", id: "p143" },
-    { category: "Business", use_case: "Competitive Landscape Summary", prompt: "Summarize the competitive landscape for online mattress retailers, identifying 2-3 major players and their key differentiators.", id: "p144" },
-    { category: "Business", use_case: "Investor Pitch Points", prompt: "Generate key talking points for a 1-minute elevator pitch to potential investors about a startup focused on sustainable packaging.", id: "p145" },
-    { category: "Business", use_case: "Mission Statement Drafting", prompt: "Help draft a mission statement for a non-profit organization dedicated to animal rescue. Focus on compassion, rehabilitation, and adoption.", id: "p146" },
-    { category: "Business", use_case: "Risk Assessment Ideas", prompt: "Identify potential risks associated with launching a new e-commerce website.", id: "p147" },
-    { category: "Finance", use_case: "Explain Financial Term", prompt: "Explain the concept of 'compound interest' in simple terms.", id: "p148" },
-    { category: "Finance", use_case: "Budget Planning Categories", prompt: "Suggest common budget categories for a personal monthly budget (e.g., housing, transportation, food, entertainment).", id: "p149" },
-    { category: "Finance", use_case: "Investment Strategy Comparison", prompt: "Briefly compare the general risk and potential return characteristics of investing in stocks versus bonds.", id: "p150" },
-    { category: "Finance", use_case: "Savings Goal Calculation Setup", prompt: "Outline the steps to calculate how much needs to be saved monthly to reach a savings goal of $10,000 in 2 years.", id: "p151" },
-    { category: "Business", use_case: "Meeting Follow-Up Actions", prompt: "List potential action items that might arise from a project brainstorming meeting.", id: "p152" },
-    { category: "Business", use_case: "Customer Feedback Analysis", prompt: "Analyze the following customer feedback comments and identify recurring themes or issues: [Paste sample feedback comments here]", id: "p153" },
-    { category: "Finance", use_case: "Explain Stock Market Index", prompt: "Explain what a stock market index (like the S&P 500) represents.", id: "p154" },
-    { category: "Business", use_case: "Generate Business Names", prompt: "Brainstorm 10 potential names for a new artisanal bakery.", id: "p155" },
-    { category: "Business", use_case: "Partnership Proposal Ideas", prompt: "Suggest ideas for a potential partnership between a local gym and a nearby health food store.", id: "p156" },
-    { category: "Finance", use_case: "Debt Reduction Strategies", prompt: "Briefly explain the 'debt snowball' and 'debt avalanche' methods for paying off debt.", id: "p157" },
-
-    // --- HR & Recruitment ---
-    { category: "HR", use_case: "Job Description Draft", prompt: "Draft a job description for a 'Junior Web Developer' position. Include responsibilities, required qualifications, and preferred skills.", id: "p158" },
-    { category: "HR", use_case: "Interview Question Generation (Behavioral)", prompt: "Generate 5 behavioral interview questions to assess a candidate's teamwork and collaboration skills.", id: "p159" },
-    { category: "HR", use_case: "Onboarding Checklist Ideas", prompt: "Create a checklist of key tasks for a new employee's first week (e.g., setup accounts, meet the team, review company policies, initial training).", id: "p160" },
-    { category: "HR", use_case: "Performance Review Phrases (Positive)", prompt: "Provide examples of positive phrases to use in a performance review regarding an employee's 'initiative'.", id: "p161" },
-    { category: "HR", use_case: "Performance Review Phrases (Constructive)", prompt: "Provide examples of constructive phrases to use in a performance review regarding an employee's 'time management skills'.", id: "p162" },
-    { category: "HR", use_case: "Employee Survey Questions (Satisfaction)", prompt: "Draft 5 questions for an anonymous employee survey aimed at gauging job satisfaction and company culture.", id: "p163" },
-    { category: "HR", use_case: "Training Module Outline", prompt: "Outline a short training module on 'Effective Email Communication' for new hires.", id: "p164" },
-    { category: "HR", use_case: "Exit Interview Questions", prompt: "Generate key questions to ask during an employee exit interview to gather feedback about their experience.", id: "p165" },
-    { category: "HR", use_case: "Diversity & Inclusion Initiative Ideas", prompt: "Suggest 3 initiatives a company could implement to promote diversity and inclusion in the workplace.", id: "p166" },
-    { category: "HR", use_case: "Internal Job Posting Draft", prompt: "Draft an internal announcement for a newly opened 'Project Manager' position, encouraging current employees to apply.", id: "p167" },
-    { category: "Recruitment", use_case: "LinkedIn Outreach Message (Passive Candidate)", prompt: "Write a short, personalized LinkedIn message to reach out to a passive candidate for a potential job opportunity.", id: "p168" },
-    { category: "Recruitment", use_case: "Screening Questions", prompt: "List 5 initial screening questions to ask candidates applying for a customer support role.", id: "p169" },
-
-    // --- Data Science & Analysis ---
-    { category: "Data Science", use_case: "Generate Sample Data (CSV)", prompt: "Describe the structure and generate 5 sample rows for a CSV file containing customer purchase data (CustomerID, ProductID, PurchaseDate, Amount).", id: "p170" },
-    { category: "Data Science", use_case: "Explain Statistical Concept", prompt: "Explain the difference between correlation and causation.", id: "p171" },
-    { category: "Data Science", use_case: "Python Code for Plotting", prompt: "Provide a simple Python code snippet using Matplotlib or Seaborn to create a scatter plot from two lists of data, 'x_values' and 'y_values'.", id: "p172" },
-    { category: "Data Science", use_case: "Suggest Data Cleaning Steps", prompt: "Suggest common data cleaning steps to perform on a dataset before analysis (e.g., handling missing values, removing duplicates, correcting errors).", id: "p173" },
-    { category: "Data Science", use_case: "Interpret Model Results", prompt: "Explain what an R-squared value of 0.85 means in the context of a linear regression model.", id: "p174" },
-    { category: "Data Science", use_case: "Machine Learning Algorithm Choice", prompt: "For a dataset with labeled categories (e.g., 'spam' vs 'not spam'), suggest a suitable type of machine learning algorithm for classification and briefly explain why.", id: "p175" },
-    { category: "Data Science", use_case: "Feature Engineering Ideas", prompt: "Suggest potential new features that could be engineered from a 'timestamp' column in a dataset (e.g., day of week, hour of day, month).", id: "p176" },
-    { category: "Data Science", use_case: "Explain A/B Testing", prompt: "Explain the concept of A/B testing and its purpose in website optimization.", id: "p177" },
-    { category: "Data Analysis", use_case: "SQL Query for Aggregation", prompt: "Write an SQL query to calculate the average order value per customer from an 'orders' table (containing 'customer_id' and 'order_amount').", id: "p178" },
-    { category: "Data Analysis", use_case: "Identify Data Visualization Type", prompt: "What type of chart or visualization would be best suited for showing the distribution of ages in a customer dataset?", id: "p179" },
-
-    // --- Customer Service ---
-    { category: "Customer Service", use_case: "Draft Polite Refusal", prompt: "Draft a polite email to a customer explaining why their request for a refund outside the policy window cannot be granted, offering an alternative if possible (e.g., store credit).", id: "p180" },
-    { category: "Customer Service", use_case: "Generate Troubleshooting Steps", prompt: "Generate basic troubleshooting steps for a customer reporting that they cannot log into their online account.", id: "p181" },
-    { category: "Customer Service", use_case: "Create FAQ Answer", prompt: "Write a clear and concise answer for an FAQ: 'What is your shipping policy?'", id: "p182" },
-    { category: "Customer Service", use_case: "Write Apology Message", prompt: "Draft a sincere apology message to a customer who experienced a significant delay in their order.", id: "p183" },
-    { category: "Customer Service", use_case: "Role-Play Difficult Customer", prompt: "Act as a customer service representative responding to an angry customer whose product arrived damaged. Show empathy and offer solutions.", id: "p184" },
-    { category: "Customer Service", use_case: "Request Customer Feedback", prompt: "Draft a short message to include at the end of a support interaction asking the customer for feedback on their experience.", id: "p185" },
-    { category: "Customer Service", use_case: "Explain Policy Clearly", prompt: "Explain the company's 30-day return policy in simple, easy-to-understand language for a customer.", id: "p186" },
-    { category: "Customer Service", use_case: "De-escalation Phrases", prompt: "Suggest phrases to use when trying to de-escalate a conversation with an upset customer.", id: "p187" },
-    { category: "Customer Service", use_case: "Live Chat Opening Spiel", prompt: "Write a friendly and professional opening message for a live chat support agent.", id: "p188" },
-    { category: "Customer Service", use_case: "Knowledge Base Article Idea", prompt: "Suggest a topic for a new knowledge base article based on a common customer query about setting up email forwarding.", id: "p189" },
-
-    // --- Health & Wellness ---
-    { category: "Health & Wellness", use_case: "Healthy Recipe Ideas", prompt: "Generate 3 healthy and quick lunch ideas suitable for someone with a gluten intolerance.", id: "p190" },
-    { category: "Health & Wellness", use_case: "Create Workout Variation", prompt: "Suggest 3 variations of a standard bodyweight squat to target different muscles or increase difficulty.", id: "p191" },
-    { category: "Health & Wellness", use_case: "Explain Mindfulness Technique", prompt: "Explain a simple mindfulness breathing exercise that can be done in 5 minutes.", id: "p192" },
-    { category: "Health & Wellness", use_case: "Journal Prompts (Self-Reflection)", prompt: "Generate 5 journal prompts focused on gratitude and self-reflection.", id: "p193" },
-    { category: "Health & Wellness", use_case: "Summarize Health Article", prompt: "Summarize the key findings of this article about the benefits of regular cardiovascular exercise: [Paste article snippet here].", id: "p194" },
-    { category: "Health & Wellness", use_case: "Stress Reduction Tips", prompt: "List 5 simple tips for reducing stress during a busy workday.", id: "p195" },
-    { category: "Health & Wellness", use_case: "Explain Nutrition Concept", prompt: "Explain the difference between macronutrients and micronutrients.", id: "p196" },
-    { category: "Health & Wellness", use_case: "Generate Healthy Snack List", prompt: "Generate a list of 10 healthy snack ideas that are easy to prepare.", id: "p197" },
-    { category: "Health & Wellness", use_case: "Sleep Hygiene Tips", prompt: "Provide tips for improving sleep hygiene.", id: "p198" },
-
-    // --- Travel ---
-    { category: "Travel", use_case: "Itinerary Planning (Budget)", prompt: "Outline a possible 5-day budget-friendly itinerary for visiting Rome, Italy. Include suggestions for free attractions and affordable food options.", id: "p199" },
-    { category: "Travel", use_case: "Packing List (Beach Vacation)", prompt: "Generate a packing list for a 7-day beach vacation in a tropical climate.", id: "p200" },
-    { category: "Travel", use_case: "Suggest Local Phrases (French)", prompt: "List 5-10 basic French phrases useful for a tourist visiting Paris (e.g., hello, thank you, excuse me, how much is it?).", id: "p201" },
-    { category: "Travel", use_case: "Find Attractions by Interest", prompt: "Suggest historical sites and museums to visit in London for someone interested in World War II history.", id: "p202" },
-    { category: "Travel", use_case: "Compare Transportation Options", prompt: "Compare the pros and cons of traveling between Amsterdam and Brussels by train versus bus.", id: "p203" },
-    { category: "Travel", use_case: "Cultural Etiquette Tips (Japan)", prompt: "Provide 3-5 cultural etiquette tips for tourists visiting Japan.", id: "p204" },
-    { category: "Travel", use_case: "Adventure Activity Ideas", prompt: "Suggest adventure activities (e.g., hiking, kayaking, zip-lining) suitable for a trip to Costa Rica.", id: "p205" },
-    { category: "Travel", use_case: "Find Local Food Recommendations", prompt: "What are some traditional dishes a visitor should try when in Lisbon, Portugal?", id: "p206" },
-
-    // --- Miscellaneous ---
-    { category: "General Knowledge", use_case: "Explain Concept", prompt: "Explain the concept of 'confirmation bias'.", id: "p207" },
-    { category: "General Knowledge", use_case: "Fact Check", prompt: "Is it true that lightning never strikes the same place twice? Explain.", id: "p208" },
-    { category: "General Knowledge", use_case: "Historical Figure Summary", prompt: "Provide a brief summary of the life and significance of Marie Curie.", id: "p209" },
-    { category: "Brainstorming", use_case: "Gift Ideas", prompt: "Brainstorm gift ideas for a friend who loves gardening and reading.", id: "p210" },
-    { category: "Brainstorming", use_case: "Event Theme Ideas", prompt: "Suggest themes for a company summer party.", id: "p211" },
-    { category: "Summarization", use_case: "Summarize Text", prompt: "Summarize the following paragraph about the history of the internet into one sentence: [Paste paragraph here]", id: "p212" },
-    { category: "Comparison", use_case: "Compare Items", prompt: "Compare owning a cat versus owning a dog, listing pros and cons for each.", id: "p213" },
-    { category: "How-To", use_case: "Basic Task Instructions", prompt: "Explain how to tie a standard shoelace knot.", id: "p214" },
-    { category: "How-To", use_case: "Recipe Steps", prompt: "List the steps to make a simple grilled cheese sandwich.", id: "p215" },
-    { category: "Gaming", use_case: "Character Build Ideas", prompt: "Suggest a character build concept for a stealthy archer in the game Skyrim.", id: "p216" },
-    { category: "Music", use_case: "Chord Progression Ideas", prompt: "Suggest a common 4-chord progression suitable for a pop song in the key of C Major.", id: "p217" },
-    { category: "Philosophy", use_case: "Explain Philosophical Concept", prompt: "Explain the basic idea behind Stoicism.", id: "p218" },
-    { category: "Personal Development", use_case: "Identify Limiting Beliefs", prompt: "Help identify potential limiting beliefs related to public speaking.", id: "p219" },
-    { category: "DIY", use_case: "Project Steps", prompt: "Outline the basic steps to paint a small wooden bookshelf.", id: "p220" },
-];
-
-
-        // --- DOM Elements ---
+        // DOM Elements (Ensure these IDs match your HTML)
         const promptGrid = document.getElementById('prompt-grid');
         const categoryFilters = document.getElementById('category-filters');
         const searchInput = document.getElementById('search-input');
@@ -647,331 +339,175 @@
         const builderOutputPrompt = document.getElementById('builder-output-prompt');
         const copyBuilderOutputBtn = document.getElementById('copy-builder-output');
         const currentYearSpan = document.getElementById('current-year');
-        const paginationControls = document.getElementById('pagination-controls');
+        const linkedInShareBtn = document.getElementById('linkedin-share-btn'); // Get share button
 
-        // --- Pagination State ---
-        let currentPage = 1;
-        const itemsPerPage = 9; // How many prompts per page
-        let currentFilteredPrompts = []; // Holds the currently filtered list
-
-        // --- Functions ---
-
-        // Function to display prompts (paginated)
-        function displayPrompts(promptsToDisplay) {
+        // Functions
+        function displayPrompts(filteredPrompts) {
             promptGrid.innerHTML = '';
-            noResultsDiv.classList.add('d-none');
-
-            if (!promptsToDisplay || promptsToDisplay.length === 0) {
+            if (!filteredPrompts || filteredPrompts.length === 0) {
                 noResultsDiv.classList.remove('d-none');
-                if(paginationControls) paginationControls.innerHTML = ''; // Clear pagination if no results
-                return;
+                promptGrid.appendChild(noResultsDiv);
+            } else {
+                noResultsDiv.classList.add('d-none');
+                filteredPrompts.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-6 col-lg-4 mb-4 prompt-card';
+                    card.setAttribute('data-category', (p.category || 'Uncategorized').toLowerCase());
+                    const promptId = p.id ? p.id : 'prompt-' + Math.random().toString(36).substr(2, 9);
+                    card.innerHTML = `
+                        <div class="card h-100">
+                             <i class="bi bi-clipboard copy-button fs-5" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy Prompt" onclick="copyToClipboard(event, '${promptId}')"></i>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${p.use_case || 'Prompt'}</h5>
+                                <p class="card-text flex-grow-1" id="prompt-text-${promptId}">${p.prompt || 'No prompt text available.'}</p>
+                                <span class="badge bg-secondary align-self-start">${p.category || 'Uncategorized'}</span>
+                            </div>
+                        </div>`;
+                    promptGrid.appendChild(card);
+                });
             }
-
-            const startIndex = (currentPage - 1) * itemsPerPage;
-            const endIndex = startIndex + itemsPerPage;
-            const paginatedPrompts = promptsToDisplay.slice(startIndex, endIndex);
-
-            paginatedPrompts.forEach(p => {
-                const card = document.createElement('div');
-                // Ensure prompt cards have consistent height within a row on medium+ screens
-                card.className = 'col-md-6 col-lg-4 mb-4 prompt-card d-flex';
-                card.setAttribute('data-category', p.category.toLowerCase());
-                card.innerHTML = `
-                    <div class="card h-100 w-100"> <i class="bi bi-clipboard copy-button fs-5" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy Prompt" onclick="copyToClipboard('${p.id}')"></i>
-                        <div class="card-body d-flex flex-column">
-                            <h5 class="card-title">${p.use_case}</h5>
-                            <p class="card-text flex-grow-1" id="prompt-text-${p.id}">${p.prompt}</p>
-                            <span class="badge bg-secondary align-self-start mt-auto">${p.category}</span> </div>
-                    </div>
-                `;
-                promptGrid.appendChild(card);
-            });
-
             initializeTooltips();
-            renderPaginationControls(promptsToDisplay.length);
         }
 
-        // Function to render pagination controls
-        function renderPaginationControls(totalItems) {
-             if (!paginationControls) return;
-             paginationControls.innerHTML = '';
-
-            const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-            if (totalPages <= 1) {
-                return;
-            }
-
-            // Previous Button
-            const prevLi = document.createElement('li');
-            prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
-            prevLi.innerHTML = `<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>`;
-            if (currentPage > 1) {
-                prevLi.querySelector('a').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage - 1);
-                });
-            }
-            paginationControls.appendChild(prevLi);
-
-            // Page Number Buttons (Basic implementation)
-            // Consider adding ellipsis logic for many pages
-            for (let i = 1; i <= totalPages; i++) {
-                const pageLi = document.createElement('li');
-                pageLi.className = `page-item ${i === currentPage ? 'active' : ''}`;
-                pageLi.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                if (i !== currentPage) {
-                    pageLi.querySelector('a').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        handlePageChange(i);
-                    });
-                }
-                paginationControls.appendChild(pageLi);
-            }
-
-            // Next Button
-            const nextLi = document.createElement('li');
-            nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
-            nextLi.innerHTML = `<a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>`;
-            if (currentPage < totalPages) {
-                nextLi.querySelector('a').addEventListener('click', (e) => {
-                    e.preventDefault();
-                    handlePageChange(currentPage + 1);
-                });
-            }
-            paginationControls.appendChild(nextLi);
-        }
-
-        // Function to handle page changes
-        function handlePageChange(newPage) {
-            currentPage = newPage;
-            displayPrompts(currentFilteredPrompts);
-            // Optional: Scroll to top of library section
-            const librarySection = document.getElementById('library');
-            if(librarySection) {
-                 librarySection.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Function to populate category filters (using margins)
         function populateCategories() {
-            if (!prompts || prompts.length === 0) {
-                console.warn("Prompts array is empty or not defined.");
-                return;
-            }
-            const categories = ['all', ...new Set(prompts.map(p => p.category))]
-                               .sort((a, b) => a === 'all' ? -1 : b === 'all' ? 1 : a.localeCompare(b));
-            categoryFilters.innerHTML = ''; // Clear existing
-
+            if (typeof prompts === 'undefined' || prompts.length === 0) { console.error("Cannot populate categories: prompts data missing."); return; }
+            const categories = [...new Set(prompts.map(p => p.category || 'Uncategorized'))].sort();
+            while (categoryFilters.children.length > 1) { categoryFilters.removeChild(categoryFilters.lastChild); }
             categories.forEach(cat => {
                 const button = document.createElement('button');
                 button.type = 'button';
-                button.className = 'btn btn-outline-primary filter-button m-1'; // Added m-1
-                button.textContent = cat === 'all' ? 'All' : cat;
+                button.className = 'btn btn-outline-primary filter-button'; // CSS rule handles rounding
+                button.textContent = cat;
                 button.setAttribute('data-filter', cat.toLowerCase());
-
-                if (cat === 'all') {
-                    button.classList.add('active');
-                }
                 categoryFilters.appendChild(button);
             });
         }
 
-        // Function to filter and search prompts
         function filterAndSearchPrompts() {
-            if (!prompts || prompts.length === 0) {
-                currentFilteredPrompts = [];
-                currentPage = 1;
-                displayPrompts(currentFilteredPrompts);
-                return;
-            }
+            if (typeof prompts === 'undefined') { console.error("Cannot filter prompts: prompts data missing."); return; }
             const searchTerm = searchInput.value.toLowerCase();
-            // Ensure categoryFilters exists and has an active button before filtering
-             const activeButton = categoryFilters ? categoryFilters.querySelector('.filter-button.active') : null;
-             const activeFilter = activeButton ? activeButton.getAttribute('data-filter') : 'all'; // Default to 'all' if no button found
-
+            const activeFilterButton = document.querySelector('#category-filters .filter-button.active');
+            const activeFilter = activeFilterButton ? activeFilterButton.getAttribute('data-filter') : 'all';
             const filteredPrompts = prompts.filter(p => {
-                const categoryMatch = activeFilter === 'all' || p.category.toLowerCase() === activeFilter;
-                const searchMatch = p.prompt.toLowerCase().includes(searchTerm) ||
-                                    p.use_case.toLowerCase().includes(searchTerm) ||
-                                    p.category.toLowerCase().includes(searchTerm);
+                const promptText = (p.prompt || '').toLowerCase();
+                const useCase = (p.use_case || '').toLowerCase();
+                const category = (p.category || 'Uncategorized').toLowerCase();
+                const categoryMatch = activeFilter === 'all' || category === activeFilter;
+                const searchMatch = promptText.includes(searchTerm) || useCase.includes(searchTerm) || category.includes(searchTerm);
                 return categoryMatch && searchMatch;
             });
-
-            currentFilteredPrompts = filteredPrompts;
-            currentPage = 1; // Reset to page 1
-            displayPrompts(currentFilteredPrompts);
+            displayPrompts(filteredPrompts);
         }
 
-        // Function to copy text to clipboard
-        function copyToClipboard(promptId) {
-             const promptElement = document.getElementById(`prompt-text-${promptId}`);
-             if (!promptElement) return; // Element not found
-
-            const promptText = promptElement.innerText;
+        function copyToClipboard(event, promptId) {
+            const targetElement = event.target;
+            const promptTextElement = document.getElementById(`prompt-text-${promptId}`);
+            if (!promptTextElement) { console.error('Prompt text element not found:', promptId); return; }
+            const promptText = promptTextElement.innerText;
             navigator.clipboard.writeText(promptText).then(() => {
-                // Tooltip Feedback
-                 const buttonElement = event.target; // Assumes click event is available
-                 if (!buttonElement) return;
-
-                 const tooltip = bootstrap.Tooltip.getInstance(buttonElement);
-                 if (!tooltip) return; // Tooltip instance might not exist yet
-
-                 const originalTitle = buttonElement.getAttribute('data-bs-original-title') || buttonElement.getAttribute('title'); // Get original title safely
-                 buttonElement.setAttribute('data-bs-original-title', 'Copied!');
+                 let tooltip = bootstrap.Tooltip.getInstance(targetElement) || new bootstrap.Tooltip(targetElement);
+                 const originalTitle = targetElement.getAttribute('data-bs-original-title') || targetElement.getAttribute('title');
+                 targetElement.setAttribute('data-bs-original-title', 'Copied!');
                  tooltip.show();
-                 setTimeout(() => {
-                     buttonElement.setAttribute('data-bs-original-title', originalTitle);
-                     tooltip.hide();
-                 }, 1500);
-
+                 setTimeout(() => { targetElement.setAttribute('data-bs-original-title', originalTitle); tooltip.hide(); }, 1500);
             }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                 const buttonElement = event.target;
-                 if (!buttonElement) return;
-                 const tooltip = bootstrap.Tooltip.getInstance(buttonElement);
-                 if (!tooltip) return;
-                 const originalTitle = buttonElement.getAttribute('data-bs-original-title') || buttonElement.getAttribute('title');
-                 buttonElement.setAttribute('data-bs-original-title', 'Copy Failed!');
+                console.error('Failed to copy:', err);
+                 let tooltip = bootstrap.Tooltip.getInstance(targetElement) || new bootstrap.Tooltip(targetElement);
+                 const originalTitle = targetElement.getAttribute('data-bs-original-title') || targetElement.getAttribute('title');
+                 targetElement.setAttribute('data-bs-original-title', 'Copy Failed!');
                  tooltip.show();
-                  setTimeout(() => {
-                     buttonElement.setAttribute('data-bs-original-title', originalTitle);
-                     tooltip.hide();
-                 }, 1500);
+                 setTimeout(() => { targetElement.setAttribute('data-bs-original-title', originalTitle); tooltip.hide(); }, 1500);
             });
         }
 
-        // Function to copy builder output
-         function copyBuilderOutput() {
+        function copyBuilderOutput() {
             const textToCopy = builderOutputPrompt.innerText;
              navigator.clipboard.writeText(textToCopy).then(() => {
-                 const tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn);
-                  if (!tooltip) return;
+                 let tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn) || new bootstrap.Tooltip(copyBuilderOutputBtn);
                  const originalTitle = copyBuilderOutputBtn.getAttribute('data-bs-original-title') || copyBuilderOutputBtn.getAttribute('title');
                  copyBuilderOutputBtn.setAttribute('data-bs-original-title', 'Copied!');
                  tooltip.show();
-                 setTimeout(() => {
-                     copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle);
-                     tooltip.hide();
-                 }, 1500);
+                 setTimeout(() => { copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle); tooltip.hide(); }, 1500);
              }).catch(err => {
-                console.error('Failed to copy builder output: ', err);
-                 const tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn);
-                  if (!tooltip) return;
+                console.error('Failed to copy builder output:', err);
+                 let tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn) || new bootstrap.Tooltip(copyBuilderOutputBtn);
                  const originalTitle = copyBuilderOutputBtn.getAttribute('data-bs-original-title') || copyBuilderOutputBtn.getAttribute('title');
                  copyBuilderOutputBtn.setAttribute('data-bs-original-title', 'Copy Failed!');
                  tooltip.show();
-                 setTimeout(() => {
-                     copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle);
-                     tooltip.hide();
-                 }, 1500);
+                 setTimeout(() => { copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle); tooltip.hide(); }, 1500);
             });
         }
 
-        // Function to initialize Bootstrap Tooltips
         function initializeTooltips() {
-            // Dispose existing tooltips first to prevent duplicates
-             const existingTooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-             existingTooltips.forEach(el => {
-                 const tooltipInstance = bootstrap.Tooltip.getInstance(el);
-                 if (tooltipInstance) {
-                     tooltipInstance.dispose();
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => {
+                const tooltip = bootstrap.Tooltip.getInstance(el);
+                if (tooltip) tooltip.dispose();
+                 if (!el.hasAttribute('data-bs-original-title') && el.hasAttribute('title')) {
+                     el.setAttribute('data-bs-original-title', el.getAttribute('title'));
                  }
-             });
-             // Initialize new tooltips
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.map(function (tooltipTriggerEl) {
-                return new bootstrap.Tooltip(tooltipTriggerEl);
+                 new bootstrap.Tooltip(el);
             });
         }
 
-        // Function to handle prompt builder submission
-         function handleBuilderSubmit(event) {
+        function handleBuilderSubmit(event) {
             event.preventDefault();
-
             const goal = document.getElementById('builder-goal').value;
             const topic = document.getElementById('builder-topic').value;
             const tone = document.getElementById('builder-tone').value;
             const format = document.getElementById('builder-format').value;
             const persona = document.getElementById('builder-persona').value.trim();
-
-            if (goal === 'Choose...' || !topic) {
-                 alert('Please select a goal and enter a topic.');
-                 return;
-             }
-
-            let promptString = "";
-            if(persona){
-                 promptString += `Act as ${persona}. `;
-             }
-             promptString += `${goal} the following topic: "${topic}". `;
-             if (tone !== 'neutral') {
-                promptString += `Use a ${tone} tone. `;
-             }
-             promptString += `Present the information in ${format}.`;
-
-             builderOutputPrompt.textContent = promptString.trim();
-             builderOutputArea.style.display = 'block';
-             // Ensure tooltip for the builder copy button is initialized or re-initialized
-             initializeTooltips();
+            if (goal === 'Choose...' || !topic) { alert('Please select a goal and enter a topic.'); return; }
+            let promptString = persona ? `Act as ${persona}. ` : "";
+            promptString += `${goal} the following topic: "${topic}". `;
+            if (tone !== 'neutral') promptString += `Use a ${tone} tone. `;
+            promptString += `Present the information in ${format}.`;
+            builderOutputPrompt.textContent = promptString.trim();
+            builderOutputArea.style.display = 'block';
+            initializeTooltips();
          }
 
-        // --- Event Listeners ---
-
-        // Category filter clicks
-        if(categoryFilters){
-            categoryFilters.addEventListener('click', (event) => {
-                const targetButton = event.target.closest('.filter-button');
-                if (targetButton && !targetButton.classList.contains('active')) { // Check if it's a button and not already active
-                    // Remove active state from all buttons
-                    categoryFilters.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
-                    // Add active state to the clicked button
-                    targetButton.classList.add('active');
-                    // Trigger filtering
-                    filterAndSearchPrompts();
+        function setupShareLinks() {
+            if (linkedInShareBtn) {
+                try {
+                    const currentUrl = window.location.href;
+                    // Check if URL is accessible (basic check for http/https)
+                    if (currentUrl.startsWith('http')) {
+                        const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+                        linkedInShareBtn.href = linkedInShareUrl;
+                    } else {
+                        // If it's a local file URL (file://), disable or hide the button?
+                        console.warn("Share button disabled for local file URL.");
+                        linkedInShareBtn.style.display = 'none'; // Hide button if not deployable
+                        // Or set a placeholder href and maybe add a tooltip explaining it needs deployment
+                        // linkedInShareBtn.href = '#';
+                        // linkedInShareBtn.setAttribute('title', 'Deploy the page to enable sharing');
+                        // initializeTooltips(); // Re-init if title changed
+                    }
+                } catch (e) {
+                    console.error("Error setting up share links:", e);
+                    if (linkedInShareBtn) linkedInShareBtn.style.display = 'none';
                 }
-            });
+            }
         }
 
-        // Search input changes
-         if(searchInput){
-             searchInput.addEventListener('input', filterAndSearchPrompts);
-         }
+        // Event Listeners
+        if(categoryFilters) { categoryFilters.addEventListener('click', (event) => { if (event.target.classList.contains('filter-button')) { document.querySelectorAll('#category-filters .filter-button').forEach(btn => btn.classList.remove('active')); event.target.classList.add('active'); filterAndSearchPrompts(); } }); }
+        if(searchInput) { searchInput.addEventListener('input', filterAndSearchPrompts); }
+        if(builderForm) { builderForm.addEventListener('submit', handleBuilderSubmit); }
+        if(copyBuilderOutputBtn) { copyBuilderOutputBtn.addEventListener('click', copyBuilderOutput); }
 
-
-        // Prompt builder form submission
-        if(builderForm){
-            builderForm.addEventListener('submit', handleBuilderSubmit);
-        }
-
-
-         // Copy builder output button click
-         if(copyBuilderOutputBtn){
-             copyBuilderOutputBtn.addEventListener('click', copyBuilderOutput);
-         }
-
-
-        // --- Initial Setup ---
+        // Initial Setup
         document.addEventListener('DOMContentLoaded', () => {
-            // Set current year in footer
-             if(currentYearSpan) {
-                 currentYearSpan.textContent = new Date().getFullYear();
-             }
-
-            // Ensure prompts is defined before proceeding
-            if (typeof prompts !== 'undefined' && prompts.length > 0) {
-                 populateCategories();
-                 currentFilteredPrompts = [...prompts]; // Initialize with all prompts
-                 currentPage = 1;
-                 displayPrompts(currentFilteredPrompts); // Display initial page
-             } else {
-                 console.warn("Prompts data is missing. Cannot initialize library.");
-                 // Optionally display a message in the library section
-                 if(promptGrid) promptGrid.innerHTML = '<p class="text-center text-danger">Prompt library data is missing.</p>';
-                 if(paginationControls) paginationControls.innerHTML = ''; // Clear pagination
-             }
-
-             initializeTooltips(); // Initialize any static tooltips on load
+            if(currentYearSpan) { currentYearSpan.textContent = new Date().getFullYear(); }
+            setupShareLinks(); // Setup share links
+            if (typeof prompts !== 'undefined' && Array.isArray(prompts)) {
+                 if (prompts.length > 0) { populateCategories(); displayPrompts(prompts); }
+                 else { console.warn("Prompts data loaded but empty."); if(promptGrid) promptGrid.innerHTML = '<div class="col-12"><p class="text-warning text-center">No prompts available.</p></div>'; }
+            } else {
+                console.error("Error: Prompts data not found. Check prompts.js loading.");
+                if(promptGrid) promptGrid.innerHTML = '<div class="col-12"><p class="text-danger text-center">Error loading prompt data.</p></div>';
+            }
+            initializeTooltips();
         });
 
     </script>
