@@ -322,7 +322,7 @@
         </div>
     </footer>
 
-    <script src="[https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js](https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js)" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="bootstrap.bundle.min.js"></script>
 
     <script src="prompts.js"></script>
 
@@ -496,10 +496,38 @@
         if(builderForm) { builderForm.addEventListener('submit', handleBuilderSubmit); }
         if(copyBuilderOutputBtn) { copyBuilderOutputBtn.addEventListener('click', copyBuilderOutput); }
 
-        // Initial Setup
-        document.addEventListener('DOMContentLoaded', () => {
+// --- Initial Setup ---
+document.addEventListener('DOMContentLoaded', () => {
             if(currentYearSpan) { currentYearSpan.textContent = new Date().getFullYear(); }
             setupShareLinks(); // Setup share links
+
+            // === ADD THIS CODE FOR EXPLICIT ACCORDION INITIALIZATION ===
+            try {
+                const accordionElement = document.getElementById('principlesAccordion');
+                if (accordionElement) {
+                     // You don't usually need to *create* it if the data-bs-* attributes are there,
+                     // but ensuring the JS module is aware can sometimes help.
+                     // Let's try triggering a redraw or ensuring listeners are attached.
+                     // A simpler check might be just seeing if the module loads.
+                     if (typeof bootstrap.Collapse === 'undefined') {
+                         console.error("Bootstrap Collapse component not found. Check JS loading.");
+                     } else {
+                         console.log("Bootstrap Collapse component found. Accordion should work via data attributes.");
+                         // If the above doesn't help, you could try manually initializing *each* collapse element,
+                         // but that's more complex and shouldn't be needed with the bundle.
+                         // Example (more complex, try console log first):
+                         // const collapseElements = accordionElement.querySelectorAll('.accordion-collapse');
+                         // collapseElements.forEach(el => new bootstrap.Collapse(el, { toggle: false }));
+                     }
+                } else {
+                    console.warn("Accordion element #principlesAccordion not found for explicit check.");
+                }
+            } catch (e) {
+                console.error("Error during explicit accordion check:", e);
+            }
+            // === END OF ADDED CODE ===
+
+
             if (typeof prompts !== 'undefined' && Array.isArray(prompts)) {
                  if (prompts.length > 0) { populateCategories(); displayPrompts(prompts); }
                  else { console.warn("Prompts data loaded but empty."); if(promptGrid) promptGrid.innerHTML = '<div class="col-12"><p class="text-warning text-center">No prompts available.</p></div>'; }
