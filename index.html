@@ -221,14 +221,14 @@
                     <div class="col-lg-8 mb-3 mb-lg-0">
                         <div id="category-filters" class="btn-group flex-wrap" role="group" aria-label="Category Filters">
                             <button type="button" class="btn btn-outline-primary filter-button active" data-filter="all">All</button>
-                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-4">
                         <input type="search" id="search-input" class="form-control" placeholder="Search prompts...">
                     </div>
                 </div>
                 <div id="prompt-grid" class="row g-4">
-                    <div class="col-12 text-center d-none" id="no-results">
+                     <div class="col-12 text-center d-none" id="no-results">
                         <p class="lead text-muted">No prompts found matching your criteria.</p>
                     </div>
                 </div>
@@ -309,7 +309,7 @@
                 <h2>Keep Sharpening Your Edge</h2>
                 <p class="lead">The AI landscape changes fast, and so does the art of communicating with it.</p>
                 <p>Use these principles and examples as your foundation, but don't stop experimenting, learning, and adapting. Refining your prompting skills is key to staying ahead, driving innovation, and truly mastering this powerful technology. What new techniques will you discover and share?</p>
-                </div>
+            </div>
         </section>
     </main>
 
@@ -323,13 +323,11 @@
     </footer>
 
     <script src="bootstrap.bundle.min.js"></script>
-
     <script src="prompts.js"></script>
-
     <script>
         // Data: 'prompts' is loaded from prompts.js
 
-        // DOM Elements (Ensure these IDs match your HTML)
+        // DOM Elements
         const promptGrid = document.getElementById('prompt-grid');
         const categoryFilters = document.getElementById('category-filters');
         const searchInput = document.getElementById('search-input');
@@ -339,7 +337,7 @@
         const builderOutputPrompt = document.getElementById('builder-output-prompt');
         const copyBuilderOutputBtn = document.getElementById('copy-builder-output');
         const currentYearSpan = document.getElementById('current-year');
-        const linkedInShareBtn = document.getElementById('linkedin-share-btn'); // Get share button
+        const linkedInShareBtn = document.getElementById('linkedin-share-btn');
 
         // Functions
         function displayPrompts(filteredPrompts) {
@@ -376,7 +374,7 @@
             categories.forEach(cat => {
                 const button = document.createElement('button');
                 button.type = 'button';
-                button.className = 'btn btn-outline-primary filter-button'; // CSS rule handles rounding
+                button.className = 'btn btn-outline-primary filter-button';
                 button.textContent = cat;
                 button.setAttribute('data-filter', cat.toLowerCase());
                 categoryFilters.appendChild(button);
@@ -470,18 +468,12 @@
             if (linkedInShareBtn) {
                 try {
                     const currentUrl = window.location.href;
-                    // Check if URL is accessible (basic check for http/https)
                     if (currentUrl.startsWith('http')) {
                         const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
                         linkedInShareBtn.href = linkedInShareUrl;
                     } else {
-                        // If it's a local file URL (file://), disable or hide the button?
                         console.warn("Share button disabled for local file URL.");
-                        linkedInShareBtn.style.display = 'none'; // Hide button if not deployable
-                        // Or set a placeholder href and maybe add a tooltip explaining it needs deployment
-                        // linkedInShareBtn.href = '#';
-                        // linkedInShareBtn.setAttribute('title', 'Deploy the page to enable sharing');
-                        // initializeTooltips(); // Re-init if title changed
+                        linkedInShareBtn.style.display = 'none';
                     }
                 } catch (e) {
                     console.error("Error setting up share links:", e);
@@ -496,37 +488,21 @@
         if(builderForm) { builderForm.addEventListener('submit', handleBuilderSubmit); }
         if(copyBuilderOutputBtn) { copyBuilderOutputBtn.addEventListener('click', copyBuilderOutput); }
 
-// --- Initial Setup ---
-document.addEventListener('DOMContentLoaded', () => {
+        // Initial Setup
+        document.addEventListener('DOMContentLoaded', () => {
             if(currentYearSpan) { currentYearSpan.textContent = new Date().getFullYear(); }
-            setupShareLinks(); // Setup share links
+            setupShareLinks();
 
-            // === ADD THIS CODE FOR EXPLICIT ACCORDION INITIALIZATION ===
+            // Explicit check/log for Bootstrap Collapse, removed the complex init part
             try {
-                const accordionElement = document.getElementById('principlesAccordion');
-                if (accordionElement) {
-                     // You don't usually need to *create* it if the data-bs-* attributes are there,
-                     // but ensuring the JS module is aware can sometimes help.
-                     // Let's try triggering a redraw or ensuring listeners are attached.
-                     // A simpler check might be just seeing if the module loads.
-                     if (typeof bootstrap.Collapse === 'undefined') {
-                         console.error("Bootstrap Collapse component not found. Check JS loading.");
-                     } else {
-                         console.log("Bootstrap Collapse component found. Accordion should work via data attributes.");
-                         // If the above doesn't help, you could try manually initializing *each* collapse element,
-                         // but that's more complex and shouldn't be needed with the bundle.
-                         // Example (more complex, try console log first):
-                         // const collapseElements = accordionElement.querySelectorAll('.accordion-collapse');
-                         // collapseElements.forEach(el => new bootstrap.Collapse(el, { toggle: false }));
-                     }
+                if (typeof bootstrap !== 'undefined' && typeof bootstrap.Collapse !== 'undefined') {
+                     console.log("Bootstrap Collapse component found. Accordion should work via data attributes if JS loaded correctly.");
                 } else {
-                    console.warn("Accordion element #principlesAccordion not found for explicit check.");
+                     console.error("Bootstrap Collapse component not found OR bootstrap object not defined. Check JS loading/path.");
                 }
             } catch (e) {
-                console.error("Error during explicit accordion check:", e);
+                console.error("Error checking for bootstrap.Collapse:", e);
             }
-            // === END OF ADDED CODE ===
-
 
             if (typeof prompts !== 'undefined' && Array.isArray(prompts)) {
                  if (prompts.length > 0) { populateCategories(); displayPrompts(prompts); }
