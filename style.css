@@ -1,77 +1,60 @@
-/* style.css - Add or modify these rules */
-
-/* Make category filter buttons fully rounded */
-#category-filters .filter-button {
-    border-radius: 50rem; /* Creates the pill shape */
-    margin-right: 0.25rem; /* Optional: Add a little space between buttons */
-    margin-bottom: 0.25rem; /* Optional: Add space for wrapping */
-}
-
-/* Make the prompt grid scrollable after a certain height */
-#prompt-grid {
-    max-height: 650px; /* Adjust this value as needed - controls when scrolling starts */
-    overflow-y: auto;  /* Add vertical scrollbar only when content exceeds max-height */
-    padding-top: 5px;  /* Optional: Add a little space at the top */
-    padding-right: 10px; /* Add space for the scrollbar to avoid overlapping content */
-    margin-right: -10px;/* Counteract padding-right to keep alignment */
-}
-
-/* Optional: Style the scrollbar for the prompt grid (WebKit browsers) */
-#prompt-grid::-webkit-scrollbar {
-    width: 8px;
-}
-
-#prompt-grid::-webkit-scrollbar-track {
-    background: #e9ecef; /* Lighter track color */
-    border-radius: 4px;
-}
-
-#prompt-grid::-webkit-scrollbar-thumb {
-    background: #adb5bd; /* Scrollbar handle color */
-    border-radius: 4px;
-}
-
-#prompt-grid::-webkit-scrollbar-thumb:hover {
-    background: #6c757d; /* Darker handle on hover */
-}
-
-
-/* --- Ensure previous rules are still present --- */
-
 body {
-    position: relative; /* Required for scrollspy */
-    padding-top: 56px; /* Adjust based on navbar height */
-    display: flex; /* Use flexbox for sticky footer */
-    flex-direction: column; /* Stack elements vertically */
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+    position: relative;
+    padding-top: 56px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
-    flex: 1 0 auto; /* Allow main content to grow and shrink, but not shrink below its content size */
+    flex: 1 0 auto;
 }
 
 footer {
-    flex-shrink: 0; /* Prevent footer from shrinking */
+    flex-shrink: 0;
 }
-
 
 .section {
     padding: 60px 0;
 }
 
-#promptLibrary .card {
-    transition: opacity 0.3s ease-out;
-    height: 100%; /* Ensure cards in a row have same height */
+#category-filters .filter-button {
+    border-radius: 50rem;
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
-/* Active filter button style (if you want more than just bold) */
-/* .filter-button.active { */
-    /* font-weight: bold; */
-    /* background-color: var(--bs-primary); */
-    /* color: white; */
-/* } */
+#prompt-grid {
+    max-height: 650px;
+    overflow-y: auto;
+    padding-top: 5px;
+    padding-right: 10px;
+    margin-right: -10px;
+}
 
-/* Style for hidden cards during filtering */
+#prompt-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+#prompt-grid::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 4px;
+}
+
+#prompt-grid::-webkit-scrollbar-thumb {
+    background: #adb5bd;
+    border-radius: 4px;
+}
+
+#prompt-grid::-webkit-scrollbar-thumb:hover {
+    background: #6c757d;
+}
+
+#promptLibrary .card {
+    transition: opacity 0.3s ease-out;
+    height: 100%;
+}
+
 .prompt-card.d-none {
      display: none !important;
 }
@@ -81,66 +64,53 @@ footer {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: #6c757d; /* Default secondary color */
+    color: #6c757d;
     transition: color 0.2s ease-in-out;
 }
 
 .copy-button:hover {
-    color: var(--bs-primary); /* Use primary color on hover */
+    color: var(--bs-primary);
 }
 
-/* Ensure long prompts wrap correctly in the builder output */
 #builder-output-prompt {
-    white-space: pre-wrap;       /* CSS3 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
-/* Make long prompt text scrollable within the card */
 #promptLibrary .card .card-text {
-    max-height: 150px; /* Adjust this value as needed (e.g., 10rem, 200px) */
-    overflow-y: auto;  /* Add vertical scrollbar only when needed */
-    margin-bottom: 0;  /* Ensure no extra margin below the scrollable area */
-    padding-right: 8px; /* Add a little space so scrollbar doesn't overlap text */
-
-    /* Keep text wrapping rules */
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 0;
+    padding-right: 8px;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
-/* Optional: Style the scrollbar for WebKit browsers (Chrome, Safari) */
 #promptLibrary .card .card-text::-webkit-scrollbar {
-    width: 6px; /* Width of the scrollbar */
+    width: 6px;
 }
 
 #promptLibrary .card .card-text::-webkit-scrollbar-track {
-    background: #f1f1f1; /* Color of the track */
+    background: #f1f1f1;
     border-radius: 3px;
 }
 
 #promptLibrary .card .card-text::-webkit-scrollbar-thumb {
-    background: #adb5bd; /* Color of the scrollbar handle */
+    background: #adb5bd;
     border-radius: 3px;
 }
 
 #promptLibrary .card .card-text::-webkit-scrollbar-thumb:hover {
-    background: #6c757d; /* Darker handle on hover */
+    background: #6c757d;
 }
 
-/* Optional: Add some margin below the accordion items */
 .accordion-item {
     margin-bottom: 0.5rem;
 }
 
-
 .social-share-btn {
-    margin-left: 10px; /* Space between copyright text and share button */
-    /* Adjust color if needed, defaults to link color */
-    /* color: #adb5bd; */
-}
-.social-share-btn:hover {
-     /* Adjust hover color if needed */
-    /* color: #f8f9fa; */
+    margin-left: 10px;
 }
