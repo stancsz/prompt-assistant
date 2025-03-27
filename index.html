@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            position: relative; /* Required for scrollspy */
+            padding-top: 56px; /* Adjust based on navbar height */
+        }
+        .section {
+            padding: 60px 0;
+        }
+        #promptLibrary .card {
+            transition: opacity 0.3s ease-out;
+            height: 100%; /* Ensure cards in a row have same height */
+        }
+        .filter-button.active {
+            font-weight: bold;
+        }
+        /* Style for hidden cards during filtering */
+        .prompt-card.d-none {
+             display: none !important; /* Override Bootstrap's !important if needed, but usually works */
+        }
+        .copy-button {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .copy-button:hover {
+            color: var(--bs-primary);
+        }
+         /* Ensure footer is at the bottom */
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        main {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
+
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="bi bi-stars"></i> Prompt Assistant</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hero">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#why-matters">Why Prompt?</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#principles">Principles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#library">Library</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#builder">Builder</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#learn-more">Learn More</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="section bg-light text-center">
+            <div class="container">
+                <h1 class="display-4 mb-3"><i class="bi bi-stars text-primary"></i> Prompt Assistant</h1>
+                <p class="lead mb-4">Unlock AI's Potential: Learn, Explore & Craft Effective Prompts</p>
+                <p class="mb-4">AI is transforming the internet, and effective 'prompt engineering' is key. This tool helps you communicate clearly with AI to get the results you need.</p>
+                <a href="#library" class="btn btn-primary btn-lg me-2">Explore Prompts <i class="bi bi-arrow-down-circle"></i></a>
+                <a href="#principles" class="btn btn-secondary btn-lg">Learn Principles <i class="bi bi-book"></i></a>
+            </div>
+        </section>
+
+        <section id="why-matters" class="section">
+            <div class="container">
+                <h2 class="text-center mb-5">The Power of a Good Prompt</h2>
+                <div class="row text-center g-4">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-bullseye fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Clarify Intent</h5>
+                                <p class="card-text">Guide the AI to understand exactly what you want it to do.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-journal-text fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Provide Context</h5>
+                                <p class="card-text">Give the AI the background information it needs for relevant answers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-shield-check fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Reduce Ambiguity</h5>
+                                <p class="card-text">Minimize errors and irrelevant outputs by being precise.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-stars fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Unlock Complexity</h5>
+                                <p class="card-text">Enable AI to tackle intricate tasks, reasoning, and creative generation.</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-binoculars fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Mitigate Bias</h5>
+                                <p class="card-text">Frame questions thoughtfully to encourage fairer, more balanced responses.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                         <div class="card h-100">
+                            <div class="card-body">
+                                <i class="bi bi-lightbulb fs-1 text-primary mb-3"></i>
+                                <h5 class="card-title">Avoid Hallucinations</h5>
+                                <p class="card-text">Provide constraints to reduce the chance of the AI generating false info.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="principles" class="section bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Crafting Better Prompts: Key Techniques</h2>
+                <div class="accordion" id="principlesAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <i class="bi bi-pencil-fill me-2"></i> Clarity & Specificity
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Be clear, concise, and as specific as possible. Avoid vague language.
+                                <br><strong>Bad:</strong> "Tell me about dogs."
+                                <br><strong>Good:</strong> "Describe the typical temperament and exercise needs of a Labrador Retriever."
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <i class="bi bi-journal-richtext me-2"></i> Context is King
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Provide relevant background details, examples, or constraints.
+                                <br><strong>Example:</strong> "Summarize the following article about renewable energy for a non-technical audience: [Article Text]"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <i class="bi bi-arrow-repeat me-2"></i> Iteration & Refinement
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Prompting is often a process. Test different wordings and structures. See how the AI responds and adjust your prompt accordingly until you get the desired output.
+                            </div>
+                        </div>
+                    </div>
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <i class="bi bi-person-badge me-2"></i> Assign a Persona/Role
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Instruct the AI to act as a specific type of person, expert, or even object.
+                                <br><strong>Example:</strong> "Act as an experienced travel agent. Suggest a 7-day itinerary for a family vacation in Costa Rica focused on nature and adventure."
+                            </div>
+                        </div>
+                    </div>
+                     <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingFive">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <i class="bi bi-list-task me-2"></i> Define the Format
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Clearly specify the desired output structure (list, table, paragraph, JSON, code block, etc.).
+                                <br><strong>Example:</strong> "Compare electric cars vs. gasoline cars based on cost, environmental impact, and performance. Present the information in a table format with clear columns."
+                            </div>
+                        </div>
+                    </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSix">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                <i class="bi bi-arrows-angle-contract me-2"></i> Use Delimiters
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Use characters like ```, ###, "", or < > to clearly separate different parts of your input, such as instructions, context text, or examples.
+                                <br><strong>Example:</strong> "Summarize the text below in three bullet points. ### Text to summarize: [Paste long text here] ###"
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingSeven">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                <i class="bi bi-card-list me-2"></i> Provide Examples (Few-Shot)
+                            </button>
+                        </h2>
+                        <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#principlesAccordion">
+                            <div class="accordion-body">
+                                Include one or more examples of the input/output format you want the AI to follow. This is especially useful for complex or nuanced tasks.
+                                <br><strong>Example:</strong> "Convert the following sentences to a more formal tone. Example 1: Input: 'Hey, what's up?' Output: 'Greetings, how are you today?' Example 2: Input: '[Your sentence here]' Output:"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="library" class="section">
+            <div class="container">
+                <h2 class="text-center mb-4">Explore Useful AI Prompts</h2>
+
+                <div class="row mb-4 align-items-center">
+                    <div class="col-lg-8 mb-3 mb-lg-0">
+                        <div id="category-filters" class="btn-group flex-wrap" role="group" aria-label="Category Filters">
+                            <button type="button" class="btn btn-outline-primary filter-button active" data-filter="all">All</button>
+                            </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <input type="search" id="search-input" class="form-control" placeholder="Search prompts...">
+                    </div>
+                </div>
+
+                <div id="prompt-grid" class="row g-4">
+                    <div class="col-12 text-center d-none" id="no-results">
+                        <p class="lead text-muted">No prompts found matching your criteria.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="builder" class="section bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Quick Prompt Starter</h2>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <form id="prompt-builder-form">
+                                    <div class="mb-3">
+                                        <label for="builder-goal" class="form-label">Goal / Action</label>
+                                        <select id="builder-goal" class="form-select">
+                                            <option selected>Choose...</option>
+                                            <option value="Summarize">Summarize</option>
+                                            <option value="Explain">Explain</option>
+                                            <option value="Brainstorm ideas for">Brainstorm ideas for</option>
+                                            <option value="Write code for">Write code for</option>
+                                            <option value="Create a list of">Create a list of</option>
+                                            <option value="Draft an email about">Draft an email about</option>
+                                             <option value="Translate to Spanish:">Translate to Spanish</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="builder-topic" class="form-label">Topic / Subject</label>
+                                        <input type="text" id="builder-topic" class="form-control" placeholder="e.g., quantum computing, a new product launch">
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                             <label for="builder-tone" class="form-label">Desired Tone</label>
+                                            <select id="builder-tone" class="form-select">
+                                                <option value="neutral" selected>Neutral</option>
+                                                <option value="formal">Formal</option>
+                                                <option value="casual">Casual</option>
+                                                <option value="expert">Expert</option>
+                                                <option value="enthusiastic">Enthusiastic</option>
+                                                <option value="simple">Simple</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="builder-format" class="form-label">Desired Format</label>
+                                            <select id="builder-format" class="form-select">
+                                                <option value="paragraph" selected>Paragraph</option>
+                                                <option value="bullet points">Bullet points</option>
+                                                <option value="numbered list">Numbered list</option>
+                                                <option value="a table">Table</option>
+                                                <option value="JSON">JSON</option>
+                                                <option value="a code block">Code block</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                     <div class="mb-3">
+                                        <label for="builder-persona" class="form-label">Act As (Optional Persona)</label>
+                                        <input type="text" id="builder-persona" class="form-control" placeholder="e.g., a travel agent, a senior software engineer">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Generate Prompt Structure</button>
+                                </form>
+                                <div id="builder-output-area" class="mt-4" style="display: none;">
+                                    <h5>Suggested Prompt:</h5>
+                                    <pre><code id="builder-output-prompt" class="text-break"></code></pre>
+                                    <button id="copy-builder-output" class="btn btn-sm btn-secondary mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy Prompt">
+                                        <i class="bi bi-clipboard"></i> Copy
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learn-more" class="section">
+            <div class="container text-center">
+                <h2>Dive Deeper</h2>
+                <p class="lead">AI and prompt engineering are rapidly evolving fields.</p>
+                <p>Continue exploring, experimenting, and refining your skills to harness the full potential of these transformative technologies. Remember that the best prompt often depends on the specific AI model and your unique goals.</p>
+                </div>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; <span id="current-year"></span> Prompt Assistant. Inspired by the evolving synergy of AI and the Internet.</p>
+            </div>
+    </footer>
+
+    <script src="[https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js](https://www.google.com/search?q=https://cdn.jsdelivr.net/npm/bootstrap%405.3.3/dist/js/bootstrap.bundle.min.js)" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <script>
+        // --- Data ---
+        const prompts = [
+            // Marketing & Content Creation
+            { category: "Marketing", use_case: "Product Description", prompt: "Craft an engaging product description for an eco-friendly water bottle highlighting its durability, insulation, and sleek design. Target audience: environmentally conscious millennials. Tone: Enthusiastic and informative.", id: "p1" },
+            { category: "Marketing", use_case: "Catchy Tagline", prompt: "Develop 5 catchy taglines for a new line of sustainable athletic wear made from recycled materials. Focus on performance and eco-friendliness.", id: "p2" },
+            { category: "Marketing", use_case: "Social Media Captions", prompt: "Generate three Instagram caption ideas for a new organic juice launch. Include relevant hashtags and a call to action (e.g., visit website, find in stores).", id: "p3" },
+            { category: "Content Creation", use_case: "Blog Post Outline", prompt: "Create a detailed blog post outline on the topic 'The Future of Remote Work'. Include sections on technology, culture, challenges, and predictions. Target audience: HR professionals.", id: "p4" },
+            { category: "Marketing", use_case: "Email Subject Line", prompt: "Write 5 compelling email subject lines to announce a 20% off summer sale for a cosmetics brand.", id: "p5" },
+             { category: "Marketing", use_case: "Homepage Headlines", prompt: "Brainstorm five compelling headlines for a SaaS company's homepage that conveys reliability, innovation, and ease of use.", id: "p6" },
+
+            // Software Development & Technical
+            { category: "Development", use_case: "Generate Python Function", prompt: "Generate a Python function `sort_list(data)` that takes a list of integers `data` and returns a new list sorted in ascending order. Include error handling for non-integer inputs.", id: "p7" },
+            { category: "Development", use_case: "Debug Javascript", prompt: "Debug the following JavaScript snippet intended to handle form submissions via fetch API. It's currently not sending the data correctly: ```javascript\n// [Paste problematic code snippet here]\n``` Explain the issue and provide the corrected code.", id: "p8" },
+            { category: "Technical", use_case: "Explain Concept Simply", prompt: "Explain the concept of object-oriented programming (OOP) using simple terms and a real-world analogy suitable for a beginner with no prior programming experience.", id: "p9" },
+            { category: "Technical", use_case: "Write Documentation", prompt: "Write brief setup documentation for a basic Node.js project using Express. Include steps for initialization, installing Express, and creating a simple 'Hello World' server.", id: "p10" },
+             { category: "Development", use_case: "HTML/CSS Layout", prompt: "Provide sample HTML and CSS code for a minimalist landing page layout featuring a hero section with a headline and button, followed by three feature boxes arranged horizontally.", id: "p11" },
+
+            // Education & Learning
+            { category: "Education", use_case: "Generate Quiz", prompt: "Generate a 10-question multiple-choice quiz about the planets in our solar system. Include answer key.", id: "p12" },
+            { category: "Learning", use_case: "Summarize Article", prompt: "Summarize the main arguments, methodology, and conclusions of the following scholarly article on climate change adaptation: [Paste article abstract or key paragraphs here]. Keep the summary under 200 words.", id: "p13" },
+            { category: "Education", use_case: "Create Lesson Plan Idea", prompt: "Suggest a fun and engaging activity for a 3rd-grade class to practice multiplication tables (focus on 7s and 8s).", id: "p14" },
+            { category: "Learning", use_case: "Explain Complex Topic", prompt: "Explain the concept of quantum computing in simple, non-technical terms suitable for a curious high school student.", id: "p15" },
+
+            // Personal Productivity & Organization
+            { category: "Productivity", use_case: "To-Do List", prompt: "Create a detailed to-do list for planning a surprise birthday party for a friend. Include tasks for invitations, venue, food, decorations, and entertainment.", id: "p16" },
+            { category: "Productivity", use_case: "Meal Plan", prompt: "Generate a 7-day weekly meal plan for a vegetarian diet aiming for approximately 1800 calories per day. Include breakfast, lunch, dinner, and snacks.", id: "p17" },
+            { category: "Productivity", use_case: "Fitness Routine", prompt: "Outline a 4-day per week fitness routine focusing on cardio (30 min) and core strengthening exercises (15 min) suitable for an intermediate fitness level.", id: "p18" },
+            { category: "Organization", use_case: "Summarize Meeting Minutes", prompt: "Summarize the key decisions, action items (with owners and deadlines if available), and main topics discussed from the following meeting minutes: [Paste meeting minutes here]", id: "p19" },
+
+            // Creative Writing & Art
+            { category: "Creative", use_case: "Short Story Idea", prompt: "Write the opening paragraph for a short story about a lonely robot living in a futuristic city who discovers a hidden garden.", id: "p20" },
+            { category: "Creative", use_case: "Poem Generation", prompt: "Generate a short, four-stanza poem exploring the theme of 'nostalgia' and 'childhood memories'. Use a melancholic but hopeful tone.", id: "p21" },
+            { category: "Creative", use_case: "Character Sketch", prompt: "Create a character sketch for a fantasy novel hero. Include their name, physical appearance, main personality traits, unique ability, and a core motivation.", id: "p22" },
+            { category: "Art", use_case: "Image Generation Prompt", prompt: "Describe a scene for an AI image generator: 'A vibrant, bustling marketplace in a cyberpunk city at night, rain slicked streets reflecting neon signs, diverse characters haggling over goods, flying vehicles overhead. Style: detailed, cinematic, atmospheric.'", id: "p23" },
+             { category: "Creative", use_case: "Dialogue Writing", prompt: "Write a short dialogue between two characters, a skeptical detective and an overly enthusiastic inventor, discussing a new, slightly unbelievable gadget.", id: "p24" },
+        ];
+
+        // --- DOM Elements ---
+        const promptGrid = document.getElementById('prompt-grid');
+        const categoryFilters = document.getElementById('category-filters');
+        const searchInput = document.getElementById('search-input');
+        const noResultsDiv = document.getElementById('no-results');
+        const builderForm = document.getElementById('prompt-builder-form');
+        const builderOutputArea = document.getElementById('builder-output-area');
+        const builderOutputPrompt = document.getElementById('builder-output-prompt');
+        const copyBuilderOutputBtn = document.getElementById('copy-builder-output');
+        const currentYearSpan = document.getElementById('current-year');
+
+        // --- Functions ---
+
+        // Function to display prompts
+        function displayPrompts(filteredPrompts) {
+            promptGrid.innerHTML = ''; // Clear existing prompts
+            if (filteredPrompts.length === 0) {
+                noResultsDiv.classList.remove('d-none');
+                 promptGrid.appendChild(noResultsDiv); // Append the 'no results' message if needed
+            } else {
+                 noResultsDiv.classList.add('d-none');
+                filteredPrompts.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'col-md-6 col-lg-4 mb-4 prompt-card'; // Added prompt-card class
+                    card.setAttribute('data-category', p.category.toLowerCase());
+                    card.innerHTML = `
+                        <div class="card h-100">
+                             <i class="bi bi-clipboard copy-button fs-5" data-bs-toggle="tooltip" data-bs-placement="left" title="Copy Prompt" onclick="copyToClipboard('${p.id}')"></i>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">${p.use_case}</h5>
+                                <p class="card-text flex-grow-1" id="prompt-text-${p.id}">${p.prompt}</p>
+                                <span class="badge bg-secondary align-self-start">${p.category}</span>
+                            </div>
+                        </div>
+                    `;
+                    promptGrid.appendChild(card);
+                });
+            }
+            // Re-initialize tooltips for newly added elements
+            initializeTooltips();
+        }
+
+         // Function to populate category filters
+        function populateCategories() {
+            const categories = [...new Set(prompts.map(p => p.category))].sort();
+            categories.forEach(cat => {
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = 'btn btn-outline-primary filter-button';
+                button.textContent = cat;
+                button.setAttribute('data-filter', cat.toLowerCase());
+                categoryFilters.appendChild(button);
+            });
+        }
+
+        // Function to filter and search prompts
+        function filterAndSearchPrompts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-button.active').getAttribute('data-filter');
+
+            const filteredPrompts = prompts.filter(p => {
+                const categoryMatch = activeFilter === 'all' || p.category.toLowerCase() === activeFilter;
+                const searchMatch = p.prompt.toLowerCase().includes(searchTerm) ||
+                                    p.use_case.toLowerCase().includes(searchTerm) ||
+                                    p.category.toLowerCase().includes(searchTerm);
+                return categoryMatch && searchMatch;
+            });
+
+            displayPrompts(filteredPrompts);
+        }
+
+        // Function to copy text to clipboard
+        function copyToClipboard(promptId) {
+            const promptText = document.getElementById(`prompt-text-${promptId}`).innerText;
+            navigator.clipboard.writeText(promptText).then(() => {
+                // --- Tooltip Feedback ---
+                const buttonElement = event.target; // Get the button that was clicked
+                 const tooltip = bootstrap.Tooltip.getInstance(buttonElement);
+                 // Temporarily change title, show tooltip, then revert
+                 const originalTitle = buttonElement.getAttribute('data-bs-original-title');
+                 buttonElement.setAttribute('data-bs-original-title', 'Copied!');
+                 tooltip.show();
+                 setTimeout(() => {
+                     buttonElement.setAttribute('data-bs-original-title', originalTitle);
+                     tooltip.hide();
+                 }, 1500); // Hide after 1.5 seconds
+                 // --- End Tooltip Feedback ---
+
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                // Optional: Show error feedback
+                 const buttonElement = event.target;
+                 const tooltip = bootstrap.Tooltip.getInstance(buttonElement);
+                 const originalTitle = buttonElement.getAttribute('data-bs-original-title');
+                 buttonElement.setAttribute('data-bs-original-title', 'Copy Failed!');
+                 tooltip.show();
+                  setTimeout(() => {
+                     buttonElement.setAttribute('data-bs-original-title', originalTitle);
+                     tooltip.hide();
+                 }, 1500);
+            });
+        }
+
+        // Function to copy builder output
+         function copyBuilderOutput() {
+            const textToCopy = builderOutputPrompt.innerText;
+             navigator.clipboard.writeText(textToCopy).then(() => {
+                 const tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn);
+                 const originalTitle = copyBuilderOutputBtn.getAttribute('data-bs-original-title');
+                 copyBuilderOutputBtn.setAttribute('data-bs-original-title', 'Copied!');
+                 tooltip.show();
+                 setTimeout(() => {
+                     copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle);
+                     tooltip.hide();
+                 }, 1500);
+             }).catch(err => {
+                console.error('Failed to copy builder output: ', err);
+                 const tooltip = bootstrap.Tooltip.getInstance(copyBuilderOutputBtn);
+                 const originalTitle = copyBuilderOutputBtn.getAttribute('data-bs-original-title');
+                 copyBuilderOutputBtn.setAttribute('data-bs-original-title', 'Copy Failed!');
+                 tooltip.show();
+                 setTimeout(() => {
+                     copyBuilderOutputBtn.setAttribute('data-bs-original-title', originalTitle);
+                     tooltip.hide();
+                 }, 1500);
+            });
+        }
+
+
+        // Function to initialize Bootstrap Tooltips
+        function initializeTooltips() {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                // Dispose existing tooltip if it exists, before creating a new one
+                 const existingTooltip = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+                if (existingTooltip) {
+                     existingTooltip.dispose();
+                }
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        }
+
+        // Function to handle prompt builder submission
+         function handleBuilderSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const goal = document.getElementById('builder-goal').value;
+            const topic = document.getElementById('builder-topic').value;
+            const tone = document.getElementById('builder-tone').value;
+            const format = document.getElementById('builder-format').value;
+            const persona = document.getElementById('builder-persona').value.trim();
+
+
+            if (goal === 'Choose...' || !topic) {
+                 alert('Please select a goal and enter a topic.');
+                 return;
+             }
+
+            let promptString = "";
+            if(persona){
+                 promptString += `Act as ${persona}. `;
+             }
+
+             promptString += `${goal} the following topic: "${topic}". `;
+
+             if (tone !== 'neutral') {
+                promptString += `Use a ${tone} tone. `;
+             }
+
+             promptString += `Present the information in ${format}.`;
+
+             builderOutputPrompt.textContent = promptString.trim();
+             builderOutputArea.style.display = 'block';
+              // Ensure tooltip for the new copy button is initialized
+             initializeTooltips(); // Re-init might be needed if the button wasn't visible initially
+         }
+
+
+        // --- Event Listeners ---
+
+        // Category filter clicks
+        categoryFilters.addEventListener('click', (event) => {
+            if (event.target.classList.contains('filter-button')) {
+                document.querySelectorAll('.filter-button').forEach(btn => btn.classList.remove('active'));
+                event.target.classList.add('active');
+                filterAndSearchPrompts();
+            }
+        });
+
+        // Search input changes
+        searchInput.addEventListener('input', filterAndSearchPrompts);
+
+        // Prompt builder form submission
+        builderForm.addEventListener('submit', handleBuilderSubmit);
+
+         // Copy builder output button click
+         copyBuilderOutputBtn.addEventListener('click', copyBuilderOutput);
+
+
+        // --- Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            currentYearSpan.textContent = new Date().getFullYear();
+            populateCategories();
+            displayPrompts(prompts); // Display all prompts initially
+            initializeTooltips(); // Initialize tooltips on page load
+        });
+
+    </script>
+
+</body>
+</html>
